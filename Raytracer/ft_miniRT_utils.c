@@ -140,6 +140,30 @@ t_vector3D	ft_init_vector(double x, double y, double z)
 	return (res);
 }
 
+double		ft_aire_tr(t_vector3D a, t_vector3D b, t_vector3D c)
+{
+	t_vector3D	ab;
+	t_vector3D	ac;
+	t_vector3D	bc;
+
+	ab = ft_sous_vector(b, a);
+	ac = ft_sous_vector(c, a);
+	bc = ft_sous_vector(c, b);
+
+	double disab;
+	double disac;
+	double disbc;
+
+	disab = ft_distance(ab);
+	disac = ft_distance(ac);
+	disbc = ft_distance(bc);
+
+	double res;
+
+	res = 0.5 * ft_distance(ft_cross_product(ab, ac));
+	return (res);
+}
+
 void		ft_affichage_vector(t_vector3D v)
 {
 	printf("x : %f\t y : %f\t z : %f\n", v.x, v.y, v.z);

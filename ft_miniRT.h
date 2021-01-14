@@ -265,4 +265,5 @@ int             ft_close_mouse(t_scene *s);
 t_vector3D      ft_translate_vector(t_vector3D v, int keycode);
 void			ft_affichage_vector(t_vector3D v);
 double			ft_determinant_matrice(t_vector3D v1, t_vector3D v2);
+double			ft_aire_tr(t_vector3D a, t_vector3D b, t_vector3D c);
 #endif

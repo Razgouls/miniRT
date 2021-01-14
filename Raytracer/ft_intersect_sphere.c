@@ -81,39 +81,18 @@ double		ft_intersect_plane(t_ray ray, t_plane *plane)
 	return (t);
 }
 
-double		ft_barycentre(t_ray ray, t_triangle triangle, t_calc_tri edge)
+double		ft_intersect_triangle(t_ray ray, t_triangle *tr)
 {
-	double		det;
-	t_vector3D	normale;
-	t_vector3D	dist_origin_fist;
-	t_vector3D	q;
-
-	normale = ft_cross_product(ray.dir, edge.edge2);
-	det = ft_vect(edge.edge1, normale);
-	if (det <= 0)
-		return (-1);
-	edge.a = 1.0 / det;
-	dist_origin_fist = ft_sous_vector(ray.origin, triangle.p1);
-	edge.b = edge.a * ft_vect(dist_origin_fist, normale);
-	if (edge.b < 0.0 || edge.b > 1.0)
-		return (-1);
-	q = ft_cross_product(dist_origin_fist, edge.edge1);
-	edge.c = edge.a * ft_vect(ray.dir, q);
-	if (edge.c < 0.0 || edge.b + edge.c > 1.0)
-		return (-1);
-	return (edge.a * ft_vect(edge.edge2, q));
-}
-
-double		ft_intersect_triangle(t_ray ray, t_triangle *triangle)
-{
-	t_calc_tri	edge;
+	t_vector3D	intersect;
 	double		t;
 
-	edge.edge1 = ft_sous_vector(triangle->p2, triangle->p1);
-	edge.edge2 = ft_sous_vector(triangle->p3, triangle->p1);
-	t = ft_barycentre(ray, *triangle, edge);
-	if (t > 0)
-		triangle->base.normale = ft_cross_product(edge.edge1, edge.edge2);
+	t = -(ray.origin.y - tr->p1.y) / ray.dir.y;
+	if (t < 0)
+		return (-1);
+	intersect = ft_point_intersect_ray(ray.origin, ray.dir, t);
+	if (ft_aire_tr(tr->p1, tr->p2, tr->p3) < ft_aire_tr(tr->p1, intersect, tr->p2) + ft_aire_tr(tr->p2, intersect, tr->p3) + ft_aire_tr(tr->p1, intersect, tr->p3) - 0.001)
+		return (-1);
+	tr->base.normale = ft_init_vector(0, 1, 0);
 	return (t);
 }
 
