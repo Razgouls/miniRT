@@ -179,21 +179,20 @@ double		ft_intersect_cone(t_ray ray, t_cone *cone)
 double		ft_intersect_square(t_ray ray, t_square *square)
 {
 	t_vector3D	intersect;
-	t_vector3D	p1;
-	t_vector3D	p2;
+	t_plane		plane;
 	double		t1;
 	double		t2;
 
-	t1 = -(ray.origin.y - square->base.origin.y) / ray.dir.y;
+	plane.base = square->base;
+	t1 = ft_intersect_plane(ray, &plane);
 	if (t1 <= 0)
 		return (-1);
 	intersect = ft_point_intersect_ray(ray.origin, ray.dir, t1);
+	intersect = ft_sous_vector(intersect, square->base.origin);
 	t2 = square->height / 2;
 	if (intersect.x < -t2 || intersect.x > t2 || intersect.y < -t2 || intersect.y > t2 || intersect.z < -t2 || intersect.z > t2)
 		return (-1);
-	p1 = ft_add_vector(square->base.origin, ft_init_vector(0, square->height, 0));
-	p2 = ft_add_vector(square->base.origin, ft_init_vector(square->height, 0, 0));;
-	square->base.normale = ft_cross_product(ft_sous_vector(p1, square->base.origin), ft_sous_vector(p2, square->base.origin));
+	square->base = plane.base;
 	return (t1);
 }
 

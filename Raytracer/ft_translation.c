@@ -89,7 +89,7 @@ t_vector3D      ft_translate_vector(t_vector3D v, int keycode)
         tmp = ft_add_vector(v, ft_init_vector(0, -VALUE_TRANSLATION, 0));
     else if (keycode == 'r')
         tmp = ft_add_vector(v, ft_init_vector(0, 0, VALUE_TRANSLATION));
-    else if (keycode == 'f')
+    else //f
         tmp = ft_add_vector(v, ft_init_vector(0, 0, -VALUE_TRANSLATION));
     return (tmp);
 }

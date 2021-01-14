@@ -62,6 +62,7 @@ t_vector3D      ft_raytracer2(t_ray ray, t_scene s)
     colors = ft_multi_reel(s.ambient_light.colors, s.ambient_light.ratio);
     if (object)
     {
+        //return (intersect);
         while (s.index_light > 0)
         {
             blocked = 1;
