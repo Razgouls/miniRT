@@ -109,9 +109,9 @@ int		ft_fill_triangle(char **strs, t_list **list)
 	if (!(triangle = malloc(sizeof(*triangle))))
 		return (ft_clear(list, strs));
 	ft_fill_base(strs, &base);
-	ft_fill_base_origin(ft_split(strs[1], ','), &triangle->point_first);
-	ft_fill_base_origin(ft_split(strs[2], ','), &triangle->point_second);
-	ft_fill_base_origin(ft_split(strs[3], ','), &triangle->point_third);
+	ft_fill_base_origin(ft_split(strs[1], ','), &triangle->p1);
+	ft_fill_base_origin(ft_split(strs[2], ','), &triangle->p2);
+	ft_fill_base_origin(ft_split(strs[3], ','), &triangle->p3);
 	triangle->base = base;
 	ft_lstadd_back(list, ft_lstnew(triangle));
 	ft_free_tab(strs);

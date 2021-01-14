@@ -81,8 +81,7 @@ double		ft_intersect_plane(t_ray ray, t_plane *plane)
 	return (t);
 }
 
-
-double		ft_preparate_test_bounds(t_ray ray, t_triangle triangle, t_calc_tri edge)
+double		ft_barycentre(t_ray ray, t_triangle triangle, t_calc_tri edge)
 {
 	double		det;
 	t_vector3D	normale;
@@ -91,18 +90,18 @@ double		ft_preparate_test_bounds(t_ray ray, t_triangle triangle, t_calc_tri edge
 
 	normale = ft_cross_product(ray.dir, edge.edge2);
 	det = ft_vect(edge.edge1, normale);
-	if (det == 0)
+	if (det <= 0)
 		return (-1);
-	edge.f = 1.0 / det;
-	dist_origin_fist = ft_sous_vector(ray.origin, triangle.point_first);
-	edge.u = edge.f * ft_vect(dist_origin_fist, normale);
-	if (edge.u < 0.0 || edge.u > 1.0)
+	edge.a = 1.0 / det;
+	dist_origin_fist = ft_sous_vector(ray.origin, triangle.p1);
+	edge.b = edge.a * ft_vect(dist_origin_fist, normale);
+	if (edge.b < 0.0 || edge.b > 1.0)
 		return (-1);
 	q = ft_cross_product(dist_origin_fist, edge.edge1);
-	edge.v = edge.f * ft_vect(ray.dir, q);
-	if (edge.v < 0.0 || edge.u + edge.v > 1.0)
+	edge.c = edge.a * ft_vect(ray.dir, q);
+	if (edge.c < 0.0 || edge.b + edge.c > 1.0)
 		return (-1);
-	return (edge.f * ft_vect(edge.edge2, q));
+	return (edge.a * ft_vect(edge.edge2, q));
 }
 
 double		ft_intersect_triangle(t_ray ray, t_triangle *triangle)
@@ -110,12 +109,19 @@ double		ft_intersect_triangle(t_ray ray, t_triangle *triangle)
 	t_calc_tri	edge;
 	double		t;
 
-	edge.edge1 = ft_sous_vector(triangle->point_second, triangle->point_first);
-	edge.edge2 = ft_sous_vector(triangle->point_third, triangle->point_first);
-	t = ft_preparate_test_bounds(ray, *triangle, edge);
+	edge.edge1 = ft_sous_vector(triangle->p2, triangle->p1);
+	edge.edge2 = ft_sous_vector(triangle->p3, triangle->p1);
+	t = ft_barycentre(ray, *triangle, edge);
 	if (t > 0)
 		triangle->base.normale = ft_cross_product(edge.edge1, edge.edge2);
 	return (t);
+}
+
+double		ft_calcule_area(t_vector3D v1, t_vector3D v2, t_vector3D v3)
+{
+	double	det;
+	det = ((v1.x - v3.x) * (v2.y - v3.y)) - ((v2.x - v3.x) * (v1.y - v3.y));
+	return (det / 2);
 }
 
 double		ft_intersect_cylindre(t_ray ray, t_cylindre *cylindre)

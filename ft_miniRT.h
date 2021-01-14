@@ -133,9 +133,9 @@ typedef struct			s_cylindre
 typedef struct			s_triangle
 {
 	t_base_form			base;
-	t_vector3D			point_first;
-	t_vector3D			point_second;
-	t_vector3D			point_third;
+	t_vector3D			p1;
+	t_vector3D			p2;
+	t_vector3D			p3;
 }						t_triangle;
 
 typedef struct 			s_cone
@@ -189,9 +189,9 @@ typedef struct 			s_calc_tri
 {
 	t_vector3D			edge1;
 	t_vector3D			edge2;
-	double				f;
-	double				u;
-	double				v;
+	double				a;
+	double				b;
+	double				c;
 }						t_calc_tri;
 
 int				ft_fill_res(char **strs, t_identifiant *id, t_scene *s);
@@ -264,4 +264,5 @@ int     		ft_give_i(int keycode);
 int             ft_close_mouse(t_scene *s);
 t_vector3D      ft_translate_vector(t_vector3D v, int keycode);
 void			ft_affichage_vector(t_vector3D v);
+double			ft_determinant_matrice(t_vector3D v1, t_vector3D v2);
 #endif

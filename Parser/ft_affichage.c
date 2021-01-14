@@ -81,8 +81,8 @@ void	ft_affiche_triangle(t_triangle *triangle)
 {
 	printf("%s\t", triangle->base.id);
 	printf("%f,%f,%f\t", triangle->base.origin.x, triangle->base.origin.y, triangle->base.origin.z);
-	printf("%f,%f,%f\t", triangle->point_first.x, triangle->point_first.y, triangle->point_first.z);
-	printf("%f,%f,%f\t", triangle->point_second.x, triangle->point_second.y, triangle->point_second.z);
-	printf("%f,%f,%f\t", triangle->point_third.x, triangle->point_third.y, triangle->point_third.z);
+	printf("%f,%f,%f\t", triangle->p1.x, triangle->p1.y, triangle->p1.z);
+	printf("%f,%f,%f\t", triangle->p2.x, triangle->p2.y, triangle->p2.z);
+	printf("%f,%f,%f\t", triangle->p3.x, triangle->p3.y, triangle->p3.z);
 	printf("%f,%f,%f\n", triangle->base.colors.x, triangle->base.colors.y, triangle->base.colors.z);
 }

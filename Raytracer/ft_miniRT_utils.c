@@ -122,6 +122,14 @@ double		ft_orient(t_vector3D a, t_vector3D b, t_vector3D c, t_vector3D n)
 
 }
 
+double		ft_determinant_matrice(t_vector3D v1, t_vector3D v2)
+{
+	double	res;
+
+	res = (v1.x * v2.y) - (v1.y * v2.x);
+	return (res);
+}
+
 t_vector3D	ft_init_vector(double x, double y, double z)
 {
 	t_vector3D res;

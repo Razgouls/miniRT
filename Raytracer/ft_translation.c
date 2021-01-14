@@ -62,9 +62,9 @@ int             ft_translation_objects(int keycode, void *content)
     if (ft_strcmp(b->id, "tr") == 0)
     {
         tr = (t_triangle *)content;
-        tr->point_first = ft_translate_vector(tr->point_first, keycode);
-        tr->point_second = ft_translate_vector(tr->point_second, keycode);
-        tr->point_third = ft_translate_vector(tr->point_third, keycode);
+        tr->p1 = ft_translate_vector(tr->p1, keycode);
+        tr->p2 = ft_translate_vector(tr->p2, keycode);
+        tr->p3 = ft_translate_vector(tr->p3, keycode);
         content = (void *)tr;
     }
     else
