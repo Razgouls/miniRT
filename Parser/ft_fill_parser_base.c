@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fill_parser_base.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eoliveir <eoliveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 11:23:31 by eoliveir          #+#    #+#             */
-/*   Updated: 2020/12/10 11:23:32 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/01/15 11:37:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_miniRT.h"
 
-void			ft_fill_base_origin(char **coordo, t_vector3D *origin)
+void			ft_fill_base_vector(char **coordo, t_vector3D *origin)
 {
 	t_vector3D	tmp;
 
@@ -39,7 +39,7 @@ void			ft_fill_base(char **strs, t_base_form *base)
 	while (strs[0][++i])
 		base->id[i] = strs[0][i];
 	base->id[i] = '\0';
-	ft_fill_base_origin(ft_split(strs[1], ','), &base->origin);
+	ft_fill_base_vector(ft_split(strs[1], ','), &base->origin);
 	i = 0;
 	while (strs[i + 1])
 		i++;

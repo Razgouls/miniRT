@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_miniRT_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eoliveir <eoliveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 11:13:39 by eoliveir          #+#    #+#             */
-/*   Updated: 2020/12/15 11:13:40 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/01/15 12:34:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,4 +208,57 @@ int     ft_give_i(int keycode)
     else if (keycode == '9')
         i = 8;
     return (i);
+}
+
+double			ft_vect_orient_to_rad(t_vector3D vect_orient, int axe)
+{
+	if (axe == 1)
+		return (PI * vect_orient.x);
+	if (axe == 2)
+		return (PI * vect_orient.y);
+	if (axe == 3)
+		return (PI * vect_orient.z);
+	return (0);
+}
+
+t_vector3D		ft_rotation_x(t_vector3D p, void *content)
+{
+	t_vector3D	new_point;
+	t_base_form	*base;
+	double		angle;
+
+	base = (t_base_form *)content;
+	angle = ft_vect_orient_to_rad(base->vect_orient, 1);
+	new_point.x = p.x;
+	new_point.y = cos(angle) * p.y - sin(angle) * p.z;
+	new_point.z = sin(angle) * p.y * cos(angle) * p.z;
+	return (new_point);
+}
+
+t_vector3D		ft_rotation_y(t_vector3D p, void *content)
+{
+	t_vector3D	new_point;
+	t_base_form	*base;
+	double		angle;
+
+	base = (t_base_form *)content;
+	angle = ft_vect_orient_to_rad(base->vect_orient, 2);
+	new_point.x = cos(angle) * p.x + sin(angle) * p.z;
+	new_point.y = p.y;
+	new_point.z = -sin(angle) * p.x + cos(angle) * p.z;
+	return (new_point);
+}
+
+t_vector3D		ft_rotation_z(t_vector3D p, void *content)
+{
+	t_vector3D	new_point;
+	t_base_form	*base;
+	double		angle;
+
+	base = (t_base_form *)content;
+	angle = ft_vect_orient_to_rad(base->vect_orient, 3);
+	new_point.x = cos(angle) * p.x - sin(angle) * p.y;
+	new_point.y = sin(angle) * p.x + cos(angle) * p.y;
+	new_point.z = p.z;
+	return (new_point);
 }

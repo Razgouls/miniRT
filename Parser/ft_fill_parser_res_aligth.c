@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fill_parser_res_aligth.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eoliveir <eoliveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 17:21:47 by eoliveir          #+#    #+#             */
-/*   Updated: 2020/12/08 17:21:48 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/01/15 11:36:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int				ft_fill_camera(char **strs, t_scene *s)
 		return (1);
 	}
 	camera.id = strs[0][0];
-	ft_fill_base_origin(ft_split(strs[1], ','), &camera.origin);
-	ft_fill_base_origin(ft_split(strs[2], ','), &camera.vect_orient);
+	ft_fill_base_vector(ft_split(strs[1], ','), &camera.origin);
+	ft_fill_base_vector(ft_split(strs[2], ','), &camera.vect_orient);
 	camera.origin = ft_add_vector(camera.origin, ft_init_vector(VALUE_TRANSLATION_CAMERAX, VALUE_TRANSLATION_CAMERAY, VALUE_TRANSLATION_CAMERAZ));
 	camera.fov = ft_atof(strs[3]);
 	camera.right_vect = ft_init_vector(1.0, 0.0, 0.0);
@@ -82,7 +82,7 @@ int				ft_fill_light(char **strs, t_scene *s)
 		return (1);
 	}
 	light.id = strs[0][0];
-	ft_fill_base_origin(ft_split(strs[1], ','),  &light.origin);
+	ft_fill_base_vector(ft_split(strs[1], ','),  &light.origin);
 	light.origin = ft_add_vector(light.origin, ft_init_vector(VALUE_TRANSLATION_LIGHTX, VALUE_TRANSLATION_LIGHTY, VALUE_TRANSLATION_LIGHTZ));
 	light.ratio = ft_atof(strs[2]);
 	ft_fill_base_color(ft_split(strs[3], ','), &light.colors);

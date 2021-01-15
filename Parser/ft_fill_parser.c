@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fill_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eoliveir <eoliveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 19:00:25 by eoliveir          #+#    #+#             */
-/*   Updated: 2020/12/08 19:00:26 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/01/15 12:05:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ int		ft_fill_plane(char **strs, t_list **list)
 	if (!(plane = malloc(sizeof(*plane))))
 		return (ft_clear(list, strs));
 	ft_fill_base(strs, &base);
-	ft_fill_base_origin(ft_split(strs[2], ','), &base.vect_orient);
+	ft_fill_base_vector(ft_split(strs[2], ','), &base.vect_orient);
 	plane->base = base;
 	plane->base.normale = ft_init_vector(0.0, 1.0, 0.0);
+	plane->base.rot.x = ft_rotation_x(plane->base.vect_orient, (void *)plane);
+	plane->base.rot.x = ft_rotation_y(plane->base.vect_orient, (void *)plane);
+	plane->base.rot.x = ft_rotation_z(plane->base.vect_orient, (void *)plane);
 	ft_lstadd_back(list, ft_lstnew(plane));
 	ft_free_tab(strs);
 	return (0);
@@ -46,9 +49,12 @@ int		ft_fill_square(char **strs, t_list **list)
 	if (!(square = malloc(sizeof(*square))))
 		return (ft_clear(list, strs));
 	ft_fill_base(strs, &base);
-	ft_fill_base_origin(ft_split(strs[2], ','), &base.vect_orient);
+	ft_fill_base_vector(ft_split(strs[2], ','), &base.vect_orient);
 	square->height = ft_atof(strs[3]);
 	square->base = base;
+	square->base.rot.x = ft_rotation_x(square->base.vect_orient, (void *)square);
+	square->base.rot.x = ft_rotation_y(square->base.vect_orient, (void *)square);
+	square->base.rot.x = ft_rotation_z(square->base.vect_orient, (void *)square);
 	ft_lstadd_back(list, ft_lstnew(square));
 	ft_free_tab(strs);
 	return (0);
@@ -87,10 +93,13 @@ int		ft_fill_cylindre(char **strs, t_list **list)
 	if (!(cylindre = malloc(sizeof(*cylindre))))
 		return (ft_clear(list, strs));
 	ft_fill_base(strs, &base);
-	ft_fill_base_origin(ft_split(strs[2], ','), &base.vect_orient);
+	ft_fill_base_vector(ft_split(strs[2], ','), &base.vect_orient);
 	cylindre->radius = ft_atof(strs[3]) / 2;
 	cylindre->height = ft_atof(strs[4]);
 	cylindre->base = base;
+	cylindre->base.rot.x = ft_rotation_x(cylindre->base.vect_orient, (void *)cylindre);
+	cylindre->base.rot.x = ft_rotation_y(cylindre->base.vect_orient, (void *)cylindre);
+	cylindre->base.rot.x = ft_rotation_z(cylindre->base.vect_orient, (void *)cylindre);
 	ft_lstadd_back(list, ft_lstnew(cylindre));
 	ft_free_tab(strs);
 	return (0);
@@ -109,9 +118,9 @@ int		ft_fill_triangle(char **strs, t_list **list)
 	if (!(triangle = malloc(sizeof(*triangle))))
 		return (ft_clear(list, strs));
 	ft_fill_base(strs, &base);
-	ft_fill_base_origin(ft_split(strs[1], ','), &triangle->p1);
-	ft_fill_base_origin(ft_split(strs[2], ','), &triangle->p2);
-	ft_fill_base_origin(ft_split(strs[3], ','), &triangle->p3);
+	ft_fill_base_vector(ft_split(strs[1], ','), &triangle->p1);
+	ft_fill_base_vector(ft_split(strs[2], ','), &triangle->p2);
+	ft_fill_base_vector(ft_split(strs[3], ','), &triangle->p3);
 	triangle->base = base;
 	ft_lstadd_back(list, ft_lstnew(triangle));
 	ft_free_tab(strs);
@@ -131,10 +140,13 @@ int		ft_fill_cone(char **strs, t_list **list)
 	if (!(cone = malloc(sizeof(*cone))))
 		return (ft_clear(list, strs));
 	ft_fill_base(strs, &base);
-	ft_fill_base_origin(ft_split(strs[2], ','), &base.vect_orient);
+	ft_fill_base_vector(ft_split(strs[2], ','), &base.vect_orient);
 	cone->radius = ft_atof(strs[3]) / 2;
 	cone->height = ft_atof(strs[4]);
 	cone->base = base;
+	cone->base.rot.x = ft_rotation_x(cone->base.vect_orient, (void *)cone);
+	cone->base.rot.x = ft_rotation_y(cone->base.vect_orient, (void *)cone);
+	cone->base.rot.x = ft_rotation_z(cone->base.vect_orient, (void *)cone);
 	ft_lstadd_back(list, ft_lstnew(cone));
 	ft_free_tab(strs);
 	return (0);

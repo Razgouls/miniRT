@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_miniRT.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eoliveir <eoliveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 13:52:58 by eoliveir          #+#    #+#             */
-/*   Updated: 2020/12/08 14:54:30 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/01/15 11:38:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 #define VALUE_TRANSLATION_CAMERAX 0
 #define VALUE_TRANSLATION_CAMERAY 0
 #define VALUE_TRANSLATION_CAMERAZ 0
+#define PI 3.14159265358979
 
 
 typedef struct			s_identifiant
@@ -64,6 +65,13 @@ typedef struct			s_vector3D
 	double				y;
 	double				z;
 }						t_vector3D;
+
+typedef struct			s_rot
+{
+	t_vector3D			x;
+	t_vector3D			y;
+	t_vector3D			z;
+}						t_rot;
 	
 typedef struct			s_resolution
 {
@@ -104,6 +112,7 @@ typedef	struct			s_base_form
 	t_vector3D			vect_orient;	
 	t_vector3D			colors;
 	t_vector3D			normale;
+	t_rot				rot;
 }						t_base_form;
 
 typedef struct			s_sphere
@@ -228,7 +237,7 @@ int				ft_printf_error_origin(char **origin, int index);
 int				ft_printf_error_vector(char **origin);
 void			ft_fill_base(char **strs, t_base_form *base);
 void			ft_fill_base_color(char **colors, t_vector3D *colors_t);
-void			ft_fill_base_origin(char **coordo, t_vector3D *origin);
+void			ft_fill_base_vector(char **coordo, t_vector3D *origin);
 int				ft_clear(t_list **list, char **strs);
 int				ft_init_window(t_scene *s);
 t_vector3D		ft_multi_reel(t_vector3D p1, double p2);
@@ -266,4 +275,9 @@ t_vector3D      ft_translate_vector(t_vector3D v, int keycode);
 void			ft_affichage_vector(t_vector3D v);
 double			ft_determinant_matrice(t_vector3D v1, t_vector3D v2);
 double			ft_aire_tr(t_vector3D a, t_vector3D b, t_vector3D c);
+t_vector3D		ft_rotation_x(t_vector3D p, void *content);
+t_vector3D		ft_rotation_y(t_vector3D p, void *content);
+t_vector3D		ft_rotation_z(t_vector3D p, void *content);
+double			ft_vect_orient_to_rad(t_vector3D vect_orient, int axe);
+
 #endif

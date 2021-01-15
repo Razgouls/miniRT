@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_miniRT.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elieoliveira <eoliveir@student.42.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 15:10:26 by elieolive         #+#    #+#             */
-/*   Updated: 2020/12/12 15:10:27 by elieolive        ###   ########.fr       */
+/*   Updated: 2021/01/15 11:11:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ t_vector3D      ft_raytracer2(t_ray ray, t_scene s)
         }
         s.list = s.list->next;
     }
-    intersect = ft_point_intersect_ray(ray.origin, ray.dir, dis);
     colors = ft_multi_reel(s.ambient_light.colors, s.ambient_light.ratio);
     if (object)
     {
+        intersect = ft_point_intersect_ray(ray.origin, ray.dir, dis);
         //return (intersect);
         while (s.index_light > 0)
         {
@@ -83,11 +83,7 @@ t_vector3D      ft_raytracer2(t_ray ray, t_scene s)
                 s.list = s.list->next;
             }
             if (blocked)
-            {
-                t_vector3D v;
-                v = ft_get_light_at(object, intersect, ray_light, s.light[s.index_light - 1].colors);
-                colors = ft_add_vector(colors, v);
-            }
+                colors = ft_add_vector(colors, ft_get_light_at(object, intersect, ray_light, s.light[s.index_light - 1].colors));
             s.index_light -= 1;
         }
     }
