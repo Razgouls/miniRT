@@ -66,12 +66,21 @@ typedef struct			s_vector3D
 	double				z;
 }						t_vector3D;
 
-typedef struct			s_rot
+typedef	struct			s_vector4D
 {
-	t_vector3D			x;
-	t_vector3D			y;
-	t_vector3D			z;
-}						t_rot;
+	double				x;
+	double				y;
+	double				z;
+	double				t;
+}						t_vector4D;
+
+typedef struct			s_matrice
+{
+	t_vector4D			v_x;
+	t_vector4D			v_y;
+	t_vector4D			v_z;
+	t_vector4D			v_p;
+}						t_matrice;
 	
 typedef struct			s_resolution
 {
@@ -112,7 +121,8 @@ typedef	struct			s_base_form
 	t_vector3D			vect_orient;	
 	t_vector3D			colors;
 	t_vector3D			normale;
-	t_rot				rot;
+	t_matrice			matrice;
+	t_matrice			inv_matrice;
 }						t_base_form;
 
 typedef struct			s_sphere
@@ -275,9 +285,14 @@ t_vector3D      ft_translate_vector(t_vector3D v, int keycode);
 void			ft_affichage_vector(t_vector3D v);
 double			ft_determinant_matrice(t_vector3D v1, t_vector3D v2);
 double			ft_aire_tr(t_vector3D a, t_vector3D b, t_vector3D c);
-t_vector3D		ft_rotation_x(t_vector3D p, void *content);
-t_vector3D		ft_rotation_y(t_vector3D p, void *content);
-t_vector3D		ft_rotation_z(t_vector3D p, void *content);
+t_vector3D		ft_rotation_x(t_vector3D v, void *content, int sign);
+t_vector3D		ft_rotation_y(t_vector3D v, void *content, int sign);
+t_vector3D		ft_rotation_z(t_vector3D v, void *content, int sign);
 double			ft_vect_orient_to_rad(t_vector3D vect_orient, int axe);
+t_matrice		ft_init_matrice_rot(t_vector3D vect_orient, int sign);
+void			ft_affichage_matrice(t_matrice m);
+t_matrice		ft_init_matrice_trans(t_vector3D trans, int sign);
+t_vector3D		ft_trans_orient(t_ray ray, void *content);
+t_vector3D		ft_multi_mat_vect(t_matrice m, t_vector3D v);
 
 #endif

@@ -140,6 +140,17 @@ t_vector3D	ft_init_vector(double x, double y, double z)
 	return (res);
 }
 
+t_vector4D	ft_init_vector4D(double x, double y, double z, double t)
+{
+	t_vector4D res;
+
+	res.x = x;
+	res.y = y;
+	res.z = z;
+	res.t = t;
+	return (res);
+}
+
 double		ft_aire_tr(t_vector3D a, t_vector3D b, t_vector3D c)
 {
 	t_vector3D	ab;
@@ -221,7 +232,7 @@ double			ft_vect_orient_to_rad(t_vector3D vect_orient, int axe)
 	return (0);
 }
 
-t_vector3D		ft_rotation_x(t_vector3D p, void *content)
+t_vector3D		ft_rotation_x(t_vector3D v, void *content, int sign)
 {
 	t_vector3D	new_point;
 	t_base_form	*base;
@@ -229,13 +240,15 @@ t_vector3D		ft_rotation_x(t_vector3D p, void *content)
 
 	base = (t_base_form *)content;
 	angle = ft_vect_orient_to_rad(base->vect_orient, 1);
-	new_point.x = p.x;
-	new_point.y = cos(angle) * p.y - sin(angle) * p.z;
-	new_point.z = sin(angle) * p.y * cos(angle) * p.z;
+	if (sign == 1)
+		angle *= -1;
+	new_point.x = v.x;
+	new_point.y = cos(angle) * v.y - sin(angle) * v.z;
+	new_point.z = sin(angle) * v.y + cos(angle) * v.z;
 	return (new_point);
 }
 
-t_vector3D		ft_rotation_y(t_vector3D p, void *content)
+t_vector3D		ft_rotation_y(t_vector3D v, void *content, int sign)
 {
 	t_vector3D	new_point;
 	t_base_form	*base;
@@ -243,13 +256,15 @@ t_vector3D		ft_rotation_y(t_vector3D p, void *content)
 
 	base = (t_base_form *)content;
 	angle = ft_vect_orient_to_rad(base->vect_orient, 2);
-	new_point.x = cos(angle) * p.x + sin(angle) * p.z;
-	new_point.y = p.y;
-	new_point.z = -sin(angle) * p.x + cos(angle) * p.z;
+	if (sign == 1)
+		angle *= -1;
+	new_point.x = cos(angle) * v.x + sin(angle) * v.z;
+	new_point.y = v.y;
+	new_point.z = -sin(angle) * v.x + cos(angle) * v.z;
 	return (new_point);
 }
 
-t_vector3D		ft_rotation_z(t_vector3D p, void *content)
+t_vector3D		ft_rotation_z(t_vector3D v, void *content, int sign)
 {
 	t_vector3D	new_point;
 	t_base_form	*base;
@@ -257,8 +272,70 @@ t_vector3D		ft_rotation_z(t_vector3D p, void *content)
 
 	base = (t_base_form *)content;
 	angle = ft_vect_orient_to_rad(base->vect_orient, 3);
-	new_point.x = cos(angle) * p.x - sin(angle) * p.y;
-	new_point.y = sin(angle) * p.x + cos(angle) * p.y;
-	new_point.z = p.z;
+	if (sign == 1)
+		angle *= -1;
+	new_point.x = cos(angle) * v.x - sin(angle) * v.y;
+	new_point.y = sin(angle) * v.x + cos(angle) * v.y;
+	new_point.z = v.z;
 	return (new_point);
+}
+
+t_vector3D	ft_multi_mat_vect(t_matrice m, t_vector3D v)
+{
+	t_vector3D	res;
+
+	res.x = m.v_x.x * v.x + m.v_x.y * v.y + m.v_x.z * v.z + m.v_x.t * 1;
+	res.y = m.v_y.x * v.x + m.v_y.y * v.y + m.v_y.z * v.z + m.v_y.t * 1;
+	res.z = m.v_z.x * v.x + m.v_z.y * v.y + m.v_z.z * v.z + m.v_z.t * 1;
+	return (res);
+}
+
+t_matrice	ft_init_matrice_rot(t_vector3D vect_orient, int sign)
+{
+	t_vector3D	cos_angle;
+	t_vector3D	sin_angle;
+	t_vector3D	angle;
+	t_matrice	m;
+
+	angle.x = ft_vect_orient_to_rad(vect_orient, 1);
+	angle.y = ft_vect_orient_to_rad(vect_orient, 2);
+	angle.z = ft_vect_orient_to_rad(vect_orient, 3);
+	if (sign == 1)
+		angle = ft_multi_reel(angle, -1);
+	ft_affichage_vector(angle);
+	m.v_x = ft_init_vector4D(cos(angle.y) * cos(angle.z), (sin(angle.x) * sin(angle.y) * cos(angle.z)) - (cos(angle.x) * sin(angle.z)),
+							(cos(angle.x) * sin(angle.y) * cos(angle.z)) + (sin(angle.x) * sin(angle.z)), 0);
+	m.v_y = ft_init_vector4D(cos(angle.y) * sin(angle.z), (sin(angle.x) * sin(angle.y) * sin(angle.z)) + (cos(angle.x) * cos(angle.z)),
+							(cos(angle.x) * sin(angle.y) * sin(angle.z)) - (sin(angle.x) * cos(angle.z)), 0);
+	m.v_z = ft_init_vector4D(-sin(angle.y), sin(angle.x) * cos(angle.y), cos(angle.x) * cos(angle.y), 0);
+	m.v_p = ft_init_vector4D(0, 0, 0, 1);
+	return (m);
+}
+
+t_matrice	ft_init_matrice_trans(t_vector3D trans, int sign)
+{
+	t_matrice	m;
+
+	if (sign == 1)
+		trans = ft_multi_reel(trans, -1);
+	m.v_x = ft_init_vector4D(1, 0, 0, trans.x);
+	m.v_y = ft_init_vector4D(0, 1, 0, trans.y);
+	m.v_z = ft_init_vector4D(0, 0, 1, trans.z);
+	m.v_p = ft_init_vector4D(0, 0, 0, 1);
+	return (m);
+}
+
+t_vector3D	ft_trans_orient(t_ray ray, void *content)
+{
+	t_base_form		*base;
+	t_vector3D		new_origin;
+	t_vector3D		new_orient;
+	t_vector3D		new_dir;
+
+	base = (t_base_form *)content;
+	new_origin = ft_multi_mat_vect(base->inv_matrice, ft_init_vector(0, 0, 0));
+	new_orient = ft_multi_mat_vect(base->inv_matrice, ray.dir);
+	new_dir = ft_sous_vector(new_orient, new_origin);
+	ft_affichage_vector(new_orient);
+	return (new_dir);
 }

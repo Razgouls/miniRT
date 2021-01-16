@@ -86,3 +86,11 @@ void	ft_affiche_triangle(t_triangle *triangle)
 	printf("%f,%f,%f\t", triangle->p3.x, triangle->p3.y, triangle->p3.z);
 	printf("%f,%f,%f\n", triangle->base.colors.x, triangle->base.colors.y, triangle->base.colors.z);
 }
+
+void	ft_affichage_matrice(t_matrice m)
+{
+	printf("%f\t %f\t %f\t %f\n", m.v_x.x, m.v_x.y, m.v_x.z, m.v_x.t);
+	printf("%f\t %f\t %f\t %f\n", m.v_y.x, m.v_y.y, m.v_y.z, m.v_y.t);
+	printf("%f\t %f\t %f\t %f\n", m.v_z.x, m.v_z.y, m.v_z.z, m.v_z.t);
+	printf("%f\t %f\t %f\t %f\n", m.v_p.x, m.v_p.y, m.v_p.z, m.v_p.t);
+}
