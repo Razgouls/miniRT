@@ -294,5 +294,6 @@ void			ft_affichage_matrice(t_matrice m);
 t_matrice		ft_init_matrice_trans(t_vector3D trans, int sign);
 t_vector3D		ft_trans_orient(t_ray ray, void *content);
 t_vector3D		ft_multi_mat_vect(t_matrice m, t_vector3D v);
+double			ft_radian_to_degres(double rad);
 
 #endif

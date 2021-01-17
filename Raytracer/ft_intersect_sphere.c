@@ -64,19 +64,19 @@ double		ft_intersect_sphere(t_ray ray, t_sphere *sphere)
 
 double		ft_intersect_plane(t_ray ray, t_plane *plane)
 {
-	double	t;
-	t_ray	tmp_ray;
+	t_vector3D	intersect;
+	double		t1;
+	double		t2;
 
-	tmp_ray = ray;
 	ray.origin = ft_add_vector(ray.origin, ft_multi_reel(plane->base.origin, -1));
 	ray.origin = ft_multi_mat_vect(plane->base.inv_matrice, ray.origin);
 	ray.dir = ft_trans_orient(ray, (void *)plane);
-	t = -(ray.origin.y / ray.dir.y);
-	if (t < 0)
+	t1 = -(ray.origin.y) / ray.dir.y;
+	if (t1 <= 0)
 		return (-1);
 	plane->base.normale = ft_init_vector(0, 1, 0);
 	plane->base.normale = ft_multi_mat_vect(plane->base.matrice, plane->base.normale);
-	return (t);
+	return (t1);
 }
 
 double		ft_intersect_triangle(t_ray ray, t_triangle *tr)
@@ -112,11 +112,20 @@ double		ft_intersect_cylindre(t_ray ray, t_cylindre *cylindre)
 		return (-1);
 	racines.t1 = ((-abc.y - sqrt(det)) / (2 * abc.x));
 	racines.t2 = ((-abc.y + sqrt(det)) / (2 * abc.x));
-	if (racines.t1 > racines.t2 || (racines.t1 <= 0 && racines.t2 >= 0))
-		racines.t1 = racines.t2;
-	intersect = ft_point_intersect_ray(ray.origin, ray.dir, racines.t1);
-	if (intersect.y < 0 || intersect.y > cylindre->height)
+	if (racines.t1 < 0 && racines.t2 < 0)
 		return (-1);
+	else if (racines.t1 < 0 && racines.t2 >= 0)
+		racines.t1 = racines.t2;
+	else if (racines.t1 > 0 && racines.t2 > 0)
+	{
+		intersect = ft_point_intersect_ray(ray.origin, ray.dir, racines.t1);
+		if (intersect.y < 0 || intersect.y > cylindre->height)
+		{
+			intersect = ft_point_intersect_ray(ray.origin, ray.dir, racines.t2);
+			if (intersect.y < 0 || intersect.y > cylindre->height)
+				return (-1);
+		}
+	}
 	intersect.y = 0;
 	cylindre->base.normale = ft_multi_mat_vect(cylindre->base.matrice, intersect);
 	cylindre->base.normale = ft_divi_reel(cylindre->base.normale, cylindre->radius);

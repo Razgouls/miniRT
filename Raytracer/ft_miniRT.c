@@ -12,16 +12,19 @@
 
 #include "../ft_miniRT.h"
 
-t_vector3D      ft_get_light_at(void *content, t_vector3D intersect, t_ray ray_light, t_vector3D color_light)
+t_vector3D      ft_get_light_at(t_ray ray, void *content, t_vector3D intersect, t_ray ray_light, t_vector3D color_light)
 {
     double      angle;
+    double      c;
     t_vector3D  vector;
     t_base_form *b;
 
     b = (t_base_form *)content;
     vector = ft_sous_vector(ray_light.origin, intersect);
     vector = ft_normalize(vector);
-    //return (b->normale);
+    c = ft_radian_to_degres((acos(ft_scalaire(b->normale, ray.dir)) / (ft_distance(b->normale) * ft_distance(ray.dir))));
+    if (c < 90)
+        return (ft_init_vector(0, 0, 0));
     angle = ft_vect(b->normale, vector);
     if (angle < 0)
         return (ft_init_vector(0, 0, 0));
@@ -63,7 +66,7 @@ t_vector3D      ft_raytracer2(t_ray ray, t_scene s)
     if (object)
     {
         intersect = ft_point_intersect_ray(ray.origin, ray.dir, dis);
-        //return (intersect);
+        return (intersect);
         while (s.index_light > 0)
         {
             blocked = 1;
@@ -84,7 +87,7 @@ t_vector3D      ft_raytracer2(t_ray ray, t_scene s)
                 s.list = s.list->next;
             }
             if (blocked)
-                colors = ft_add_vector(colors, ft_get_light_at(object, intersect, ray_light, s.light[s.index_light - 1].colors));
+                colors = ft_add_vector(colors, ft_get_light_at(ray, object, intersect, ray_light, s.light[s.index_light - 1].colors));
             s.index_light -= 1;
         }
     }

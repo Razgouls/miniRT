@@ -221,6 +221,11 @@ int     ft_give_i(int keycode)
     return (i);
 }
 
+double			ft_radian_to_degres(double rad)
+{
+	return ((rad * 180) / PI);
+}
+
 double			ft_vect_orient_to_rad(t_vector3D vect_orient, int axe)
 {
 	if (axe == 1)
