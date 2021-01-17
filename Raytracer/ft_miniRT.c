@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 15:10:26 by elieolive         #+#    #+#             */
-/*   Updated: 2021/01/15 11:11:02 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/17 16:01:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ t_vector3D      ft_get_light_at(void *content, t_vector3D intersect, t_ray ray_l
     b = (t_base_form *)content;
     vector = ft_sous_vector(ray_light.origin, intersect);
     vector = ft_normalize(vector);
+    //return (b->normale);
     angle = ft_vect(b->normale, vector);
-    if (angle <= 0)
+    if (angle < 0)
         return (ft_init_vector(0, 0, 0));
     else
     {

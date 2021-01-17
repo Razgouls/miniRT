@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 19:00:25 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/15 12:05:21 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/17 11:08:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ int		ft_fill_plane(char **strs, t_list **list)
 		return (ft_clear(list, strs));
 	ft_fill_base(strs, &base);
 	ft_fill_base_vector(ft_split(strs[2], ','), &base.vect_orient);
+	base.matrice = ft_init_matrice_rot(base.vect_orient, 0);
+	base.inv_matrice = ft_init_matrice_rot(base.vect_orient, 1);
 	plane->base = base;
-	plane->base.normale = ft_init_vector(0.0, 1.0, 0.0);
 	ft_lstadd_back(list, ft_lstnew(plane));
 	ft_free_tab(strs);
 	return (0);
@@ -47,6 +48,8 @@ int		ft_fill_square(char **strs, t_list **list)
 		return (ft_clear(list, strs));
 	ft_fill_base(strs, &base);
 	ft_fill_base_vector(ft_split(strs[2], ','), &base.vect_orient);
+	base.matrice = ft_init_matrice_rot(base.vect_orient, 0);
+	base.inv_matrice = ft_init_matrice_rot(base.vect_orient, 1);
 	square->height = ft_atof(strs[3]);
 	square->base = base;
 	ft_lstadd_back(list, ft_lstnew(square));
@@ -134,6 +137,8 @@ int		ft_fill_cone(char **strs, t_list **list)
 		return (ft_clear(list, strs));
 	ft_fill_base(strs, &base);
 	ft_fill_base_vector(ft_split(strs[2], ','), &base.vect_orient);
+	base.matrice = ft_init_matrice_rot(base.vect_orient, 0);
+	base.inv_matrice = ft_init_matrice_rot(base.vect_orient, 1);
 	cone->radius = ft_atof(strs[3]) / 2;
 	cone->height = ft_atof(strs[4]);
 	cone->base = base;

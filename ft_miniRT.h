@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 13:52:58 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/15 11:38:02 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/17 10:36:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #include <string.h>
 #include <mlx.h>
 
-#define X_RES 1200
-#define Y_RES 600
+#define X_RES 2000
+#define Y_RES 1200
 #define VALUE_TRANSLATION 0.5
 #define VALUE_TRANSLATION_LIGHTX 0
 #define VALUE_TRANSLATION_LIGHTY 0

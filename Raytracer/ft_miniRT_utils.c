@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 11:13:39 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/15 12:34:45 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/17 10:23:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,8 +292,6 @@ t_vector3D	ft_multi_mat_vect(t_matrice m, t_vector3D v)
 
 t_matrice	ft_init_matrice_rot(t_vector3D vect_orient, int sign)
 {
-	t_vector3D	cos_angle;
-	t_vector3D	sin_angle;
 	t_vector3D	angle;
 	t_matrice	m;
 
@@ -302,7 +300,6 @@ t_matrice	ft_init_matrice_rot(t_vector3D vect_orient, int sign)
 	angle.z = ft_vect_orient_to_rad(vect_orient, 3);
 	if (sign == 1)
 		angle = ft_multi_reel(angle, -1);
-	ft_affichage_vector(angle);
 	m.v_x = ft_init_vector4D(cos(angle.y) * cos(angle.z), (sin(angle.x) * sin(angle.y) * cos(angle.z)) - (cos(angle.x) * sin(angle.z)),
 							(cos(angle.x) * sin(angle.y) * cos(angle.z)) + (sin(angle.x) * sin(angle.z)), 0);
 	m.v_y = ft_init_vector4D(cos(angle.y) * sin(angle.z), (sin(angle.x) * sin(angle.y) * sin(angle.z)) + (cos(angle.x) * cos(angle.z)),
@@ -336,6 +333,5 @@ t_vector3D	ft_trans_orient(t_ray ray, void *content)
 	new_origin = ft_multi_mat_vect(base->inv_matrice, ft_init_vector(0, 0, 0));
 	new_orient = ft_multi_mat_vect(base->inv_matrice, ray.dir);
 	new_dir = ft_sous_vector(new_orient, new_origin);
-	ft_affichage_vector(new_orient);
 	return (new_dir);
 }
