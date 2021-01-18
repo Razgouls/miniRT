@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 13:52:58 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/17 10:36:01 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/18 13:08:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 #define X_RES 2000
 #define Y_RES 1200
 #define VALUE_TRANSLATION 0.5
+#define VALUE_ROTATION 0.05
 #define VALUE_TRANSLATION_LIGHTX 0
 #define VALUE_TRANSLATION_LIGHTY 0
 #define VALUE_TRANSLATION_LIGHTZ 0
@@ -73,6 +74,13 @@ typedef	struct			s_vector4D
 	double				z;
 	double				t;
 }						t_vector4D;
+
+typedef struct			s_material
+{
+	t_vector3D			ambiente;
+	t_vector3D			diffuse;
+	t_vector3D			speculaire;
+}						t_material;
 
 typedef struct			s_matrice
 {
@@ -123,6 +131,7 @@ typedef	struct			s_base_form
 	t_vector3D			normale;
 	t_matrice			matrice;
 	t_matrice			inv_matrice;
+	t_material			material;
 }						t_base_form;
 
 typedef struct			s_sphere
@@ -173,7 +182,6 @@ typedef struct 			s_box
 	t_plane 			f5;
 	t_plane 			f6;
 }						t_box;
-
 
 typedef struct			s_choose_object
 {
@@ -295,5 +303,9 @@ t_matrice		ft_init_matrice_trans(t_vector3D trans, int sign);
 t_vector3D		ft_trans_orient(t_ray ray, void *content);
 t_vector3D		ft_multi_mat_vect(t_matrice m, t_vector3D v);
 double			ft_radian_to_degres(double rad);
+int             ft_rotation_camera(int keycode, t_scene *s);
+int             ft_rotation_objects(int keycode, void *content);
+t_vector3D      ft_rotate_vector(t_vector3D v, int keycode);
+void			ft_affichage(t_list *list, t_scene *s);
 
 #endif

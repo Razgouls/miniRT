@@ -6,19 +6,20 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 15:10:26 by elieolive         #+#    #+#             */
-/*   Updated: 2021/01/17 16:01:33 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/18 13:35:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_miniRT.h"
 
-t_vector3D      ft_get_light_at(t_ray ray, void *content, t_vector3D intersect, t_ray ray_light, t_vector3D color_light)
+t_vector3D      ft_get_light_at(t_ray ray, void *content, t_vector3D intersect, t_ray ray_light, t_light light)
 {
     double      angle;
     double      c;
     t_vector3D  vector;
     t_base_form *b;
 
+    (void)ray;
     b = (t_base_form *)content;
     vector = ft_sous_vector(ray_light.origin, intersect);
     vector = ft_normalize(vector);
@@ -30,8 +31,9 @@ t_vector3D      ft_get_light_at(t_ray ray, void *content, t_vector3D intersect, 
         return (ft_init_vector(0, 0, 0));
     else
     {
-        vector = ft_multi_vector(color_light, b->colors);
+        vector = ft_multi_vector(light.colors, b->colors);
         vector = ft_multi_reel(vector, angle);
+        vector = ft_multi_reel(vector, light.ratio);
         return (vector);
     }
 }
@@ -66,7 +68,6 @@ t_vector3D      ft_raytracer2(t_ray ray, t_scene s)
     if (object)
     {
         intersect = ft_point_intersect_ray(ray.origin, ray.dir, dis);
-        return (intersect);
         while (s.index_light > 0)
         {
             blocked = 1;
@@ -87,7 +88,7 @@ t_vector3D      ft_raytracer2(t_ray ray, t_scene s)
                 s.list = s.list->next;
             }
             if (blocked)
-                colors = ft_add_vector(colors, ft_get_light_at(ray, object, intersect, ray_light, s.light[s.index_light - 1].colors));
+                colors = ft_add_vector(colors, ft_get_light_at(ray, object, intersect, ray_light, s.light[s.index_light - 1]));
             s.index_light -= 1;
         }
     }
@@ -143,6 +144,8 @@ int             ft_check_keycode(int keycode)
         return (1);
     else if (keycode == 'a' || keycode == 'w' || keycode == 'd' || keycode == 's' || keycode == 'r' || keycode == 'f')
         return (2);
+    else if (keycode == 'h' || keycode == 'u' || keycode == 'k' || keycode == 'j' || keycode == 'o' || keycode == 'l')
+        return (3);
     return (0);
 }
 
@@ -152,8 +155,12 @@ int             close_clavier(int keycode, t_scene *s)
         ft_check_object_select(keycode, s);
     else if (ft_check_keycode(keycode) == 2 && ft_check_keycode(s->choose_object.last_keycode) == 1)
         ft_translation_objects(keycode, s->choose_object.current_object);
+    else if (ft_check_keycode(keycode) == 3 && ft_check_keycode(s->choose_object.last_keycode) == 1)
+        ft_rotation_objects(keycode, s->choose_object.current_object);
     else if (ft_check_keycode(keycode) == 2)
         ft_translation_camera(keycode, s);
+    else if (ft_check_keycode(keycode) == 3)
+        ft_rotation_camera(keycode, s);
     else if (keycode == 65307 && ft_check_keycode(s->choose_object.last_keycode) == 1)
         s->choose_object.last_keycode = -1;
     else if (keycode == 65307)
