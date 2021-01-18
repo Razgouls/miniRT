@@ -60,12 +60,12 @@ static int		ft_check_line(char **stock, char **line, int res_read)
 			return (1);
 		}
 		else
-			*line = ft_strndup(*stock, ft_strlen(*stock) - 0);
+			*line = ft_strndup(*stock, ft_strlen(*stock));
 		free(*stock);
 		*stock = NULL;
 		return (1);
 	}
-	*line = ft_strndup("", 0);
+	*line = 0;
 	return (0);
 }
 
