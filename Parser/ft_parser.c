@@ -14,7 +14,9 @@
 
 int		ft_fill_struct(char **strs, t_list **l, t_identifiant *id, t_scene *s)
 {
-	if (ft_strcmp(strs[0], "R") == 0)
+	if (!strs[0])
+		return (0);
+	else if (ft_strcmp(strs[0], "R") == 0)
 		return (ft_fill_res(strs, id, s));
 	else if (ft_strcmp(strs[0], "A") == 0)
 		return (ft_fill_ambient_light(strs, id, s));
@@ -77,19 +79,22 @@ void	ft_affichage(t_list *list, t_scene *s)
 
 int		ft_load_lines(int fd, t_list **l, t_identifiant *id, t_scene *s)
 {
+	char	**res_split;
 	char	*line;
 	int		i;
 
-	i = 0;
 	while ((i = ft_get_next_line(fd, &line)))
 	{
 		if (ft_strcmp(line, "") != 0 && ft_strcmp(line, "\n") != 0)
 		{
-			if (ft_fill_struct(ft_split_multi(line, "\t\n\v\f\r "), l, id, s))
+			res_split = ft_split_multi(line, "\t\n\v\f\r ");
+			if (ft_fill_struct(res_split,  l, id, s))
 			{
+				ft_clear(l, res_split);
 				free(line);
 				return (1);
 			}
+			ft_free_tab(res_split);
 		}
 		free(line);
 	}
@@ -128,9 +133,11 @@ int		main(int argc, char **argv)
 	if ((fd = open(argv[1], O_RDONLY)) < 0)
 		return (3);
 	if (!ft_load_lines(fd, &list, &id, &scene))
-		ft_affichage(list, &scene);
-	scene.list = list;
-	ft_init_window(&scene);
+	{
+		scene.list = list;
+		ft_init_window(&scene);
+		ft_lstclear(&scene.list, free);
+	}
 	close(fd);
 	return (0);
 }

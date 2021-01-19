@@ -76,7 +76,7 @@ int				ft_init_window(t_scene *s)
 		return (EXIT_FAILURE);
 	data.image = mlx_new_image(data.mlx_ptr, s->reso.res[0], s->reso.res[1]);
 	mlx_key_hook(data.mlx_win, ft_close_clavier, s);
-	mlx_hook(data.mlx_win, 17, 1L << 17, ft_close_mouse, s);
+	mlx_hook(data.mlx_win, 33, 1L << 17, ft_close_mouse, s);
 	data.buffer = (unsigned int *)mlx_get_data_addr(data.image,
 		&data.pixel_bits, &data.line_bytes, &data.endian);
 	s->width = 1;

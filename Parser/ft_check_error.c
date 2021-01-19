@@ -24,10 +24,7 @@ int		ft_check_error_res(char **strs, int boolean)
 		if (i == 3)
 			return (ft_printf("Error n : Trop de paramètres résolution\n"));
 		if (ft_atoi(strs[i]) <= 0)
-		{
-			return (ft_printf("Error n : La résolution est\
-			incorrecte : %s %s\n", strs[1], strs[2]));
-		}
+			return (ft_printf("Error n : La résolution est incorrecte\n"));
 		i++;
 	}
 	if (i < 3)
@@ -55,9 +52,9 @@ int		ft_check_error_ambient(char **strs, int boolean)
 	if (ft_atof(strs[1]) < 0 || ft_atof(strs[1]) > 1)
 	{
 		return (ft_printf("Error n : Le ratio de la lumiere\
-		ambiante est incorrecte : %s\n", strs[1]));
+		ambiante est incorrecte\n"));
 	}
-	return (ft_printf_error_colors(strs, ft_split(strs[2], ','), 0));
+	return (ft_printf_error_colors(strs, ft_split(strs[2], ',')));
 }
 
 int		ft_check_error_camera(char **strs)
@@ -73,7 +70,7 @@ int		ft_check_error_camera(char **strs)
 	if (ft_atof(strs[3]) < 0 || ft_atof(strs[3]) > 180)
 	{
 		return (ft_printf("Error n : Le FOV doit être \
-		compris entre 0 et 180 : %s\n", strs[3]));
+		compris entre 0 et 180\n"));
 	}
 	return (0);
 }
@@ -89,9 +86,9 @@ int		ft_check_error_light(char **strs)
 	if (ft_atof(strs[2]) < 0 || ft_atof(strs[2]) > 1)
 	{
 		return (ft_printf("Error n : Ratio de luminosité\
-		incorrect : %s\n", strs[2]));
+		incorrect\n"));
 	}
-	if (ft_printf_error_colors(strs, ft_split(strs[3], ','), 0))
+	if (ft_printf_error_colors(strs, ft_split(strs[3], ',')))
 		return (1);
 	return (0);
 }

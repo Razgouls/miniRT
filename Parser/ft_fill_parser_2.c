@@ -18,12 +18,9 @@ int		ft_fill_cone(char **strs, t_list **list)
 	t_base_form	base;
 
 	if (ft_check_error_cylindre(strs))
-	{
-		ft_free_tab(strs);
 		return (1);
-	}
 	if (!(cone = malloc(sizeof(*cone))))
-		return (ft_clear(list, strs));
+		return (1);
 	ft_fill_base(strs, &base);
 	ft_fill_base_vector(ft_split(strs[2], ','), &base.vect_orient);
 	base.matrice = ft_init_matrice_rot(base.vect_orient, 0);
@@ -32,6 +29,5 @@ int		ft_fill_cone(char **strs, t_list **list)
 	cone->height = ft_atof(strs[4]);
 	cone->base = base;
 	ft_lstadd_back(list, ft_lstnew(cone));
-	ft_free_tab(strs);
 	return (0);
 }

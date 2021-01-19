@@ -33,5 +33,7 @@ int		ft_atoi(const char *str)
 		res = res * 10 + str[i] - '0';
 		i++;
 	}
+	if (str[i] && (str[i] < '0' || str[i] > '9'))
+		return ('\0');
 	return (res * negatif);
 }
