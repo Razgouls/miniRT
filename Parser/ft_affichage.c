@@ -1,4 +1,4 @@
-#include "../ft_miniRT.h"
+#include "../minirt.h"
 
 void	ft_affiche_ambient_light(t_ambient_light ambient_light)
 {

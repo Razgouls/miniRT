@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eoliveir <eoliveir@student.42.fr>          +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 09:04:13 by eoliveir          #+#    #+#              #
-#    Updated: 2020/12/11 12:47:36 by eoliveir         ###   ########.fr        #
+#    Updated: 2021/01/19 11:49:16 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ SRC		 	=	ft_atoi.c \
 				ft_clamp.c \
 				ft_calc_determinant.c \
 				ft_abs.c \
+				ft_rad_to_deg.c \
 
 INCS		= libft.h
 

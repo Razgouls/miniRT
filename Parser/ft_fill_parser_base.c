@@ -6,15 +6,15 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 11:23:31 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/15 11:37:21 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/19 13:24:46 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_miniRT.h"
+#include "../minirt.h"
 
-void			ft_fill_base_vector(char **coordo, t_vector3D *origin)
+void			ft_fill_base_vector(char **coordo, t_vector *origin)
 {
-	t_vector3D	tmp;
+	t_vector	tmp;
 
 	tmp.x = ft_atof(coordo[0]);
 	tmp.y = ft_atof(coordo[1]);
@@ -23,7 +23,7 @@ void			ft_fill_base_vector(char **coordo, t_vector3D *origin)
 	ft_free_tab(coordo);
 }
 
-void			ft_fill_base_color(char **colors, t_vector3D *colors_t)
+void			ft_fill_base_color(char **colors, t_vector *colors_t)
 {
 	colors_t->x = ft_atof(colors[0]) / 255;
 	colors_t->y = ft_atof(colors[1]) / 255;
@@ -46,7 +46,7 @@ void			ft_fill_base(char **strs, t_base_form *base)
 	ft_fill_base_color(ft_split(strs[i], ','), &base->colors);
 }
 
-static 	void	ft_del(void *element)
+void			ft_del(void *element)
 {
 	free(element);
 }

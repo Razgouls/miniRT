@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eoliveir <eoliveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 14:44:33 by eoliveir          #+#    #+#             */
-/*   Updated: 2020/12/08 14:59:48 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/01/19 13:25:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_miniRT.h"
+#include "../minirt.h"
 
-int		ft_fill_struct(char **strs, t_list **list, t_identifiant *id, t_scene *s)
+int		ft_fill_struct(char **strs, t_list **l, t_identifiant *id, t_scene *s)
 {
 	if (ft_strcmp(strs[0], "R") == 0)
 		return (ft_fill_res(strs, id, s));
@@ -23,33 +23,30 @@ int		ft_fill_struct(char **strs, t_list **list, t_identifiant *id, t_scene *s)
 	else if (ft_strcmp(strs[0], "l") == 0)
 		return (ft_fill_light(strs, s));
 	else if (ft_strcmp(strs[0], "pl") == 0)
-		return (ft_fill_plane(strs, list));
+		return (ft_fill_plane(strs, l));
 	else if (ft_strcmp(strs[0], "sp") == 0)
-		return (ft_fill_sphere(strs, list));
+		return (ft_fill_sphere(strs, l));
 	else if (ft_strcmp(strs[0], "sq") == 0)
-		return (ft_fill_square(strs, list));
+		return (ft_fill_square(strs, l));
 	else if (ft_strcmp(strs[0], "cy") == 0)
-		return (ft_fill_cylindre(strs, list));
+		return (ft_fill_cylindre(strs, l));
 	else if (ft_strcmp(strs[0], "tr") == 0)
-		return (ft_fill_triangle(strs, list));
+		return (ft_fill_triangle(strs, l));
 	else if (ft_strcmp(strs[0], "co") == 0)
-		return (ft_fill_cone(strs, list));
+		return (ft_fill_cone(strs, l));
 	else
-	{
-		ft_printf("Error n : L'id %s est inconnu.\n", strs[0]);
-		return (1);
-	}
+		return (ft_printf("Error n : L'id %s est inconnu.\n", strs[0]));
 	return (0);
 }
 
 void	ft_affichage(t_list *list, t_scene *s)
 {
-	t_list *tmp;
-	int i;
+	t_list	*tmp;
+	int		i;
 
 	tmp = list;
 	i = -1;
-	ft_affiche_res(s->resolution);
+	ft_affiche_res(s->reso);
 	ft_affiche_ambient_light(s->ambient_light);
 	while (++i < s->index_cam)
 		ft_affiche_camera(s->camera[i]);
@@ -78,7 +75,7 @@ void	ft_affichage(t_list *list, t_scene *s)
 	}
 }
 
-int		ft_load_lines(int fd, t_list **list, t_identifiant *id, t_scene *s)
+int		ft_load_lines(int fd, t_list **l, t_identifiant *id, t_scene *s)
 {
 	char	*line;
 	int		i;
@@ -88,7 +85,7 @@ int		ft_load_lines(int fd, t_list **list, t_identifiant *id, t_scene *s)
 	{
 		if (ft_strcmp(line, "") != 0 && ft_strcmp(line, "\n") != 0)
 		{
-			if (ft_fill_struct(ft_split_multi(line, "\t\n\v\f\r "), list, id, s))
+			if (ft_fill_struct(ft_split_multi(line, "\t\n\v\f\r "), l, id, s))
 			{
 				free(line);
 				return (1);

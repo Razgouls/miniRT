@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_len_new_base.c                                  :+:      :+:    :+:   */
+/*   ft_rad_to_deg.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/05 00:46:36 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/19 13:04:13 by user42           ###   ########.fr       */
+/*   Created: 2021/01/19 11:48:34 by user42            #+#    #+#             */
+/*   Updated: 2021/01/19 12:58:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_len_new_base(int nb, int len_base)
+double			ft_radian_to_degres(double rad)
 {
-	int				cmp;
-
-	cmp = 0;
-	if (nb < 0)
-	{
-		cmp++;
-		nb *= -1;
-	}
-	while (nb >= len_base)
-	{
-		nb /= len_base;
-		cmp++;
-	}
-	return (++cmp);
+	return ((rad * 180) / 3.14159265);
 }

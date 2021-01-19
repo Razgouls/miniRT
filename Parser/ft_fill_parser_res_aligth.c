@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 17:21:47 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/15 11:36:56 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/19 13:24:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_miniRT.h"
+#include "../minirt.h"
 
-int		ft_fill_res(char **strs, t_identifiant *id, t_scene *s)
+int			ft_fill_res(char **strs, t_identifiant *id, t_scene *s)
 {
 	t_resolution	reso;
 
@@ -25,12 +25,12 @@ int		ft_fill_res(char **strs, t_identifiant *id, t_scene *s)
 	id->resolution = 1;
 	reso.res[0] = ft_atoi(strs[1]);
 	reso.res[1] = ft_atoi(strs[2]);
-	s->resolution = reso;
+	s->reso = reso;
 	ft_free_tab(strs);
 	return (0);
 }
 
-int		ft_fill_ambient_light(char **strs, t_identifiant *id, t_scene *s)
+int			ft_fill_ambient_light(char **strs, t_identifiant *id, t_scene *s)
 {
 	t_ambient_light	ambient_light;
 
@@ -48,7 +48,7 @@ int		ft_fill_ambient_light(char **strs, t_identifiant *id, t_scene *s)
 	return (0);
 }
 
-int				ft_fill_camera(char **strs, t_scene *s)
+int			ft_fill_camera(char **strs, t_scene *s)
 {
 	t_camera	camera;
 	int			i;
@@ -62,7 +62,9 @@ int				ft_fill_camera(char **strs, t_scene *s)
 	camera.id = strs[0][0];
 	ft_fill_base_vector(ft_split(strs[1], ','), &camera.origin);
 	ft_fill_base_vector(ft_split(strs[2], ','), &camera.vect_orient);
-	camera.origin = ft_add_vector(camera.origin, ft_init_vector(VALUE_TRANSLATION_CAMERAX, VALUE_TRANSLATION_CAMERAY, VALUE_TRANSLATION_CAMERAZ));
+	camera.origin = ft_add_vector(camera.origin,
+		ft_init_vector(VALUE_TRANSLATION_CAMERAX,
+		VALUE_TRANSLATION_CAMERAY, VALUE_TRANSLATION_CAMERAZ));
 	camera.fov = ft_atof(strs[3]);
 	camera.right_vect = ft_init_vector(1.0, 0.0, 0.0);
 	camera.up_vect = ft_init_vector(0.0, 1.0, 0.0);
@@ -72,7 +74,7 @@ int				ft_fill_camera(char **strs, t_scene *s)
 	return (0);
 }
 
-int				ft_fill_light(char **strs, t_scene *s)
+int			ft_fill_light(char **strs, t_scene *s)
 {
 	t_light	light;
 
@@ -82,8 +84,10 @@ int				ft_fill_light(char **strs, t_scene *s)
 		return (1);
 	}
 	light.id = strs[0][0];
-	ft_fill_base_vector(ft_split(strs[1], ','),  &light.origin);
-	light.origin = ft_add_vector(light.origin, ft_init_vector(VALUE_TRANSLATION_LIGHTX, VALUE_TRANSLATION_LIGHTY, VALUE_TRANSLATION_LIGHTZ));
+	ft_fill_base_vector(ft_split(strs[1], ','), &light.origin);
+	light.origin = ft_add_vector(light.origin,
+		ft_init_vector(VALUE_TRANSLATION_LIGHTX,
+		VALUE_TRANSLATION_LIGHTY, VALUE_TRANSLATION_LIGHTZ));
 	light.ratio = ft_atof(strs[2]);
 	ft_fill_base_color(ft_split(strs[3], ','), &light.colors);
 	s->light[s->index_light] = light;

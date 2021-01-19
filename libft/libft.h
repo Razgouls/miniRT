@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eoliveir <eoliveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 09:27:19 by eoliveir          #+#    #+#             */
-/*   Updated: 2020/12/08 15:24:08 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/01/19 13:03:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,10 @@ char				**ft_split_multi(char *s, char *charset);
 void				ft_reverse_tab(char *t);
 int					ft_len_new_base(int nb, int len_base);
 int					ft_atoi_base(char *str, char *base);
-void    			ft_convert_base(char *t, int n, int i, char *base);
+void				ft_convert_base(char *t, int n, int i, char *base);
 double				ft_clamp(double value, double min, double max);
 double				ft_calc_determinant(double a, double b, double c);
 double				ft_abs(double value);
+double				ft_rad_to_deg(double rad);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eoliveir <eoliveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 00:08:19 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/05 00:08:21 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/01/19 12:59:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ char	*ft_strcat(char *dest, char *src)
 	dest[cmp + i] = '\0';
 	return (dest);
 }
-
