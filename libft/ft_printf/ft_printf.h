@@ -6,14 +6,14 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 12:13:04 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/20 08:45:41 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/20 08:46:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft/libft.h"
+# include "../libft.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>

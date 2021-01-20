@@ -3,15 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eoliveir <eoliveir@student.42.fr>          +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/28 18:40:23 by eoliveir          #+#    #+#              #
-#    Updated: 2020/11/28 18:40:25 by eoliveir         ###   ########.fr        #
+#    Updated: 2021/01/20 08:50:12 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libftprintf.a
-LIBDIR		=	./libft/
 LIBFT		=	libft.a
 
 SRCS		=	ft_convert_hexa.c \
@@ -36,8 +35,6 @@ RM			=	rm -f
 				$(CC) -I. -o $@ -c $? $(FLAGS)
 
 $(NAME)		:	$(OBJS)
-				make all -C $(LIBDIR)
-				cp $(LIBDIR)/$(LIBFT) $(NAME)
 				$(AR) $(NAME) $(OBJS)
 
 all			:	$(NAME)
