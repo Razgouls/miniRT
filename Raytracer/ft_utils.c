@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 12:01:43 by user42            #+#    #+#             */
-/*   Updated: 2021/01/19 13:26:53 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/20 08:11:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ double			ft_aire_tr(t_vector a, t_vector b, t_vector c)
 {
 	t_vector	ab;
 	t_vector	ac;
-	t_vector	bc;
 	double		res;
 
 	ab = ft_sous_vector(b, a);
 	ac = ft_sous_vector(c, a);
-	bc = ft_sous_vector(c, b);
 	res = 0.5 * ft_distance(ft_cross_product(ab, ac));
 	return (res);
 }

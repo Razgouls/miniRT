@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 10:48:43 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/19 13:25:19 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/20 08:11:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-int		ft_printf_error_colors(char **strs, char **colors)
+int		ft_printf_error_colors(char **colors)
 {
 	int i;
 	int	color;
@@ -42,10 +42,8 @@ int		ft_printf_error_colors(char **strs, char **colors)
 int		ft_printf_error_origin(char **origin, int index)
 {
 	int i;
-	int j;
 
 	i = 0;
-	j = -1;
 	while (origin[i])
 		i++;
 	if (i < 3)

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 17:21:47 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/19 13:24:55 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/20 08:10:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ int			ft_fill_ambient_light(char **strs, t_identifiant *id, t_scene *s)
 int			ft_fill_camera(char **strs, t_scene *s)
 {
 	t_camera	camera;
-	int			i;
 
-	i = 0;
 	if (ft_check_error_camera(strs))
 		return (1);
 	camera.id = strs[0][0];

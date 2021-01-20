@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 14:44:33 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/19 13:25:12 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/20 08:10:11 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ int		ft_fill_struct(char **strs, t_list **l, t_identifiant *id, t_scene *s)
 
 void	ft_affichage(t_list *list, t_scene *s)
 {
-	t_list	*tmp;
 	int		i;
 
-	tmp = list;
 	i = -1;
 	ft_affiche_res(s->reso);
 	ft_affiche_ambient_light(s->ambient_light);
@@ -103,9 +101,6 @@ int		ft_load_lines(int fd, t_list **l, t_identifiant *id, t_scene *s)
 
 void	ft_init_struct_id(t_identifiant *id, t_scene *s)
 {
-	int i;
-
-	i = -1;
 	id->resolution = 0;
 	id->ambient_light = 0;
 	s->index_cam = 0;

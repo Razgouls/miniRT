@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 12:02:42 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/19 13:24:17 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/20 08:06:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		ft_check_error_ambient(char **strs, int boolean)
 		return (ft_printf("Error n : Le ratio de la lumiere\
 		ambiante est incorrecte\n"));
 	}
-	return (ft_printf_error_colors(strs, ft_split(strs[2], ',')));
+	return (ft_printf_error_colors(ft_split(strs[2], ',')));
 }
 
 int		ft_check_error_camera(char **strs)
@@ -88,7 +88,7 @@ int		ft_check_error_light(char **strs)
 		return (ft_printf("Error n : Ratio de luminosité\
 		incorrect\n"));
 	}
-	if (ft_printf_error_colors(strs, ft_split(strs[3], ',')))
+	if (ft_printf_error_colors(ft_split(strs[3], ',')))
 		return (1);
 	return (0);
 }

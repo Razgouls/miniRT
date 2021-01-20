@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 13:52:58 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/19 13:29:04 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/20 08:05:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,7 +262,7 @@ int						ft_check_error_plane(char **strs);
 int						ft_check_error_square(char **strs);
 int						ft_check_error_cylindre(char **strs);
 int						ft_check_error_triangle(char **strs);
-int						ft_printf_error_colors(char **strs, char **colors);
+int						ft_printf_error_colors(char **colors);
 int						ft_printf_error_origin(char **origin, int index);
 int						ft_printf_error_vector(char **origin);
 void					ft_fill_base(char **strs, t_base_form *base);
