@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 12:00:59 by user42            #+#    #+#             */
-/*   Updated: 2021/01/19 13:27:26 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/22 13:48:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,18 @@ t_vectorf		ft_init_vector_2(double x, double y, double z, double t)
 	res.z = z;
 	res.t = t;
 	return (res);
+}
+
+t_pixel			ft_change_color_to_pixel(t_vector v)
+{
+	t_pixel p;
+	p.r = (unsigned char)v.x;
+	p.g = (unsigned char)v.y;
+	p.b = (unsigned char)v.z;
+	return (p);
+}
+
+t_pixel			ft_get_pixel(t_scene s,int i,int j)
+{
+	return s.dat[s.reso.res[0] * j + i];
 }

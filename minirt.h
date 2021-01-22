@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 13:52:58 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/20 08:05:16 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/22 13:52:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,37 @@
 # define VALUE_TRANSLATION_CAMERAY 0
 # define VALUE_TRANSLATION_CAMERAZ 0
 # define PI 3.14159265358979
+
+typedef struct			s_bmpimhead
+{
+	int					size_imhead;
+	int					width;
+	int					height;
+	short				nbplans;
+	short				bpp;
+	int					compression;
+	int					sizeim;
+	int					hres;
+	int					vres;
+	int					cpalette;
+	int					cIpalette;
+}						t_bmpimhead;
+
+typedef struct			s_bmphead
+{
+	char				signature[2];
+	int					taille;
+	int					rsv;
+	int					offsetim;
+	t_bmpimhead			imhead;
+}						t_bmphead;
+
+typedef struct			s_pixel
+{
+	unsigned char		r;
+	unsigned char		g;
+	unsigned char		b;
+}						t_pixel;
 
 typedef struct			s_identifiant
 {
@@ -207,6 +238,13 @@ typedef struct			s_choose_object
 	int					last_keycode;
 }						t_choose_object;
 
+typedef struct			s_image
+{
+	int 				width;
+	int					height;
+	t_vector			*dat;
+}						t_image;
+
 typedef struct			s_scene
 {
 	int					index_cam;
@@ -221,6 +259,7 @@ typedef struct			s_scene
 	t_list				*list;
 	t_data				data;
 	t_choose_object		choose_object;
+	t_pixel				*dat;
 }						t_scene;
 
 typedef struct			s_calc_tri
@@ -327,5 +366,9 @@ t_vectorf				ft_init_vector_2(double x,
 							double y, double z, double t);
 int						ft_raytracer(t_scene *s);
 int						ft_check_keycode(int keycode);
+int						ft_sauver(t_scene s, const char *fichier);
+t_pixel					ft_change_color_to_pixel(t_vector v);
+t_vector				ft_get_color(t_scene *s, int i, int j);
+t_pixel					ft_get_pixel(t_scene s,int i,int j);
 
 #endif

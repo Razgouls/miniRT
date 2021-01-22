@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 12:04:21 by user42            #+#    #+#             */
-/*   Updated: 2021/01/19 13:26:13 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/22 13:40:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,31 +115,16 @@ t_vector			ft_raytracer2(t_ray ray, t_scene s)
 	return (colors);
 }
 
-int					ft_raytracer(t_scene *s)
+t_vector			ft_get_color(t_scene *s, int i, int j)
 {
-	int			i;
-	int			j;
 	t_vector	color;
 	t_ray		ray;
 
-	j = -1;
-	s->camera[s->current_camera].view = ft_calc_view(s->width, s->height, 1, s);
-	while (++j < s->reso.res[1])
-	{
-		i = -1;
-		while (++i < s->reso.res[0])
-		{
-			ray.o = s->camera[s->current_camera].origin;
-			ray.dir = ft_calcule_dir(s, i, j);
-			ray.dir = ft_normalize(ray.dir);
-			color = ft_raytracer2(ray, *s);
-			color = ft_init_vector(ft_clamp(color.x, 0, 1),
-				ft_clamp(color.y, 0, 1), ft_clamp(color.z, 0, 1));
-			s->data.buffer[j * s->reso.res[0] + i] = ft_change_color(color);
-		}
-	}
-	mlx_put_image_to_window(s->data.mlx_ptr,
-		s->data.mlx_win, s->data.image, 0, 0);
-	mlx_loop(s->data.mlx_ptr);
-	return (0);
+	ray.o = s->camera[s->current_camera].origin;
+	ray.dir = ft_normalize(ft_calcule_dir(s, i, j));
+	color = ft_raytracer2(ray, *s);
+	s->dat[s->reso.res[0] * j + i] = ft_change_color_to_pixel(ft_init_vector(color.x * 255, color.y * 255, color.z * 255));
+	color = ft_init_vector(ft_clamp(color.x, 0, 1),
+	ft_clamp(color.y, 0, 1), ft_clamp(color.z, 0, 1));
+	return (color);
 }

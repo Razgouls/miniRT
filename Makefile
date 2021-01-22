@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/20 08:42:39 by user42            #+#    #+#              #
-#    Updated: 2021/01/20 08:42:45 by user42           ###   ########.fr        #
+#    Updated: 2021/01/22 10:16:30 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC =		Maths/ft_operator.c \
 			Raytracer/ft_viewplane.c \
 			Raytracer/restes.c \
 			Raytracer/ft_minirt.c \
+			Raytracer/bmp_image.c \
 
 INCS		= minirt.h
 
