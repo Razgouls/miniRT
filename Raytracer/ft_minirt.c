@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 15:10:26 by elieolive         #+#    #+#             */
-/*   Updated: 2021/01/22 13:39:05 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/22 18:33:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,16 @@ int					ft_raytracer(t_scene *s)
 
 	j = -1;
 	s->camera[s->current_camera].view = ft_calc_view(s->width, s->height, 1, s);
+	s->image.h = 400;
+	s->image.w = 400;
+	s->image.dat = malloc(sizeof(Pixel) * s->image.w * s->image.h);
 	while (++j < s->reso.res[1])
 	{
 		i = -1;
 		while (++i < s->reso.res[0])
 			s->data.buffer[j * s->reso.res[0] + i] = ft_change_color(ft_get_color(s, i, j));
 	}
-	//if (s->save == 1)
-		ft_sauver(*s, "image.bmp");
+	export_bmp(*s);
 	mlx_put_image_to_window(s->data.mlx_ptr,
 		s->data.mlx_win, s->data.image, 0, 0);
 	mlx_loop(s->data.mlx_ptr);
@@ -103,8 +105,7 @@ int				ft_init_window(t_scene *s)
 	s->width = 1;
 	s->height = (float)s->reso.res[1] / s->reso.res[0];
 	s->data = data;
-	s->dat = malloc(sizeof(t_vector) * s->reso.res[0] * s->reso.res[1]);
 	ft_raytracer(s);
-	free(s->dat);
+	free(s->image.dat);
 	return (EXIT_SUCCESS);
 }

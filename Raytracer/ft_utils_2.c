@@ -42,16 +42,16 @@ t_vectorf		ft_init_vector_2(double x, double y, double z, double t)
 	return (res);
 }
 
-t_pixel			ft_change_color_to_pixel(t_vector v)
+Pixel			ft_change_color_to_pixel(t_vector v)
 {
-	t_pixel p;
+	Pixel p;
 	p.r = (unsigned char)v.x;
 	p.g = (unsigned char)v.y;
 	p.b = (unsigned char)v.z;
 	return (p);
 }
 
-t_pixel			ft_get_pixel(t_scene s,int i,int j)
+Pixel			ft_get_pixel(t_scene s,int i,int j)
 {
-	return s.dat[s.reso.res[0] * j + i];
+	return s.image.dat[s.reso.res[0] * j + i];
 }
