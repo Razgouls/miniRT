@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 13:52:58 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/23 09:14:20 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/23 10:31:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ typedef struct			s_ambient_light
 typedef struct			s_camera
 {
 	char				id;
-	t_vector			view;
 	t_vector			origin;
 	t_vector			vect_orient;
 	t_vector			right_vect;
@@ -290,8 +289,6 @@ t_vector				ft_add_vector(t_vector p1, t_vector p2);
 t_vector				ft_multi_vector(t_vector p1, t_vector p2);
 t_vector				ft_sous_vector(t_vector p1, t_vector p2);
 t_vector				ft_divi_reel(t_vector p1, double p2);
-t_vector				ft_calc_view(double width, double height,
-							int dis, t_scene *s);
 t_vector				ft_calcule_dir(t_scene *s, int x, int y);
 double					ft_intersect(t_ray ray, void *content);
 double					ft_intersect_sphere(t_ray ray, t_sphere *sphere);

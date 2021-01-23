@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 15:10:26 by elieolive         #+#    #+#             */
-/*   Updated: 2021/01/23 09:12:17 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/23 10:31:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int					ft_raytracer(t_scene *s)
 	int			j;
 
 	j = -1;
-	s->camera[s->current_camera].view = ft_calc_view(s->width, s->height, 1, s);
 	s->image.h = 400;
 	s->image.w = 400;
 	s->image.dat = malloc(sizeof(t_pixel) * s->image.w * s->image.h);
@@ -103,8 +102,6 @@ int					ft_init_window(t_scene *s)
 	mlx_hook(data.mlx_win, 33, 1L << 17, ft_close_mouse, s);
 	data.buffer = (unsigned int *)mlx_get_data_addr(data.image,
 		&data.pixel_bits, &data.line_bytes, &data.endian);
-	s->width = 2;
-	s->height = (float)s->reso.res[1] / s->reso.res[0];
 	s->data = data;
 	ft_raytracer(s);
 	free(s->image.dat);
