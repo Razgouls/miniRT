@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 15:10:26 by elieolive         #+#    #+#             */
-/*   Updated: 2021/01/22 18:33:02 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/23 09:12:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-unsigned int	ft_change_color(t_vector color)
+unsigned int		ft_change_color(t_vector color)
 {
 	unsigned char	rgb[3];
 	unsigned int	res;
@@ -24,7 +24,7 @@ unsigned int	ft_change_color(t_vector color)
 	return (res);
 }
 
-static int		ft_close_clavier(int keycode, t_scene *s)
+static int			ft_close_clavier(int keycode, t_scene *s)
 {
 	if (ft_check_keycode(keycode) == 1)
 		ft_check_object_select(keycode, s);
@@ -53,7 +53,7 @@ static int		ft_close_clavier(int keycode, t_scene *s)
 	return (0);
 }
 
-int				ft_close_mouse(t_scene *s)
+int					ft_close_mouse(t_scene *s)
 {
 	mlx_clear_window(s->data.mlx_ptr, s->data.mlx_win);
 	mlx_destroy_window(s->data.mlx_ptr, s->data.mlx_win);
@@ -70,12 +70,13 @@ int					ft_raytracer(t_scene *s)
 	s->camera[s->current_camera].view = ft_calc_view(s->width, s->height, 1, s);
 	s->image.h = 400;
 	s->image.w = 400;
-	s->image.dat = malloc(sizeof(Pixel) * s->image.w * s->image.h);
+	s->image.dat = malloc(sizeof(t_pixel) * s->image.w * s->image.h);
 	while (++j < s->reso.res[1])
 	{
 		i = -1;
 		while (++i < s->reso.res[0])
-			s->data.buffer[j * s->reso.res[0] + i] = ft_change_color(ft_get_color(s, i, j));
+			s->data.buffer[j *
+				s->reso.res[0] + i] = ft_change_color(ft_get_color(s, i, j));
 	}
 	export_bmp(*s);
 	mlx_put_image_to_window(s->data.mlx_ptr,
@@ -84,7 +85,7 @@ int					ft_raytracer(t_scene *s)
 	return (0);
 }
 
-int				ft_init_window(t_scene *s)
+int					ft_init_window(t_scene *s)
 {
 	t_data		data;
 
@@ -102,7 +103,7 @@ int				ft_init_window(t_scene *s)
 	mlx_hook(data.mlx_win, 33, 1L << 17, ft_close_mouse, s);
 	data.buffer = (unsigned int *)mlx_get_data_addr(data.image,
 		&data.pixel_bits, &data.line_bytes, &data.endian);
-	s->width = 1;
+	s->width = 2;
 	s->height = (float)s->reso.res[1] / s->reso.res[0];
 	s->data = data;
 	ft_raytracer(s);

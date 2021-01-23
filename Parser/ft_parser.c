@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 14:44:33 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/20 08:10:11 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/23 09:13:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		ft_load_lines(int fd, t_list **l, t_identifiant *id, t_scene *s)
 		if (ft_strcmp(line, "") != 0 && ft_strcmp(line, "\n") != 0)
 		{
 			res_split = ft_split_multi(line, "\t\n\v\f\r ");
-			if (ft_fill_struct(res_split,  l, id, s))
+			if (ft_fill_struct(res_split, l, id, s))
 			{
 				ft_clear(l, res_split);
 				free(line);

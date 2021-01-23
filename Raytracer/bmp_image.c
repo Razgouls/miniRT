@@ -6,18 +6,18 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 17:58:38 by user42            #+#    #+#             */
-/*   Updated: 2021/01/22 18:59:44 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/23 09:06:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-void	fill_bmp(char **data, t_scene s)
+void		fill_bmp(char **data, t_scene s)
 {
 	int i;
 	int x;
 	int y;
-	
+
 	i = 122;
 	y = s.reso.res[1];
 	while (y--)
@@ -32,7 +32,7 @@ void	fill_bmp(char **data, t_scene s)
 	}
 }
 
-void	header_bmp(char **data, t_scene s)
+void		header_bmp(char **data, t_scene s)
 {
 	unsigned int size;
 
@@ -54,14 +54,14 @@ void	header_bmp(char **data, t_scene s)
 	*(int *)(*data + 50) = 0;
 }
 
-int	export_bmp(t_scene s)
+int			export_bmp(t_scene s)
 {
 	int				fd;
 	unsigned int	size;
 	unsigned int	i;
 	char			*data;
 
-	size = s.reso.res[1] *s.reso.res[0] * 3;
+	size = s.reso.res[1] * s.reso.res[0] * 3;
 	if (!(data = malloc((size + 122))))
 		return (-1);
 	i = 0;

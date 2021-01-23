@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 13:52:58 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/22 18:32:49 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/23 09:14:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,19 @@
 # define VALUE_TRANSLATION_CAMERAZ 0
 # define PI 3.14159265358979
 
-typedef struct 	Pixel
+typedef struct			s_pixel
 {
-	unsigned char r, g, b;
-} 				Pixel;
+	unsigned char		r;
+	unsigned char		g;
+	unsigned char		b;
+}						t_pixel;
 
-typedef struct 	Image
+typedef struct			s_image
 {
-	int w, h;
-	Pixel *dat;
-} 				Image;
+	int					w;
+	int					h;
+	t_pixel				*dat;
+}						t_image;
 
 typedef struct			s_identifiant
 {
@@ -218,13 +221,6 @@ typedef struct			s_choose_object
 	int					last_keycode;
 }						t_choose_object;
 
-typedef struct			s_image
-{
-	int 				width;
-	int					height;
-	t_vector			*dat;
-}						t_image;
-
 typedef struct			s_scene
 {
 	int					index_cam;
@@ -239,7 +235,7 @@ typedef struct			s_scene
 	t_list				*list;
 	t_data				data;
 	t_choose_object		choose_object;
-	Image				image;
+	t_image				image;
 }						t_scene;
 
 typedef struct			s_calc_tri
@@ -347,11 +343,11 @@ t_vectorf				ft_init_vector_2(double x,
 int						ft_raytracer(t_scene *s);
 int						ft_check_keycode(int keycode);
 int						ft_sauver(t_scene s, const char *fichier);
-Pixel					ft_change_color_to_pixel(t_vector v);
+t_pixel					ft_change_color_to_pixel(t_vector v);
 t_vector				ft_get_color(t_scene *s, int i, int j);
-Pixel					ft_get_pixel(t_scene s,int i,int j);
-int	export_bmp(t_scene s);
-void	header_bmp(char **data, t_scene s);
-void	fill_bmp(char **data, t_scene s);
+t_pixel					ft_get_pixel(t_scene s, int i, int j);
+int						export_bmp(t_scene s);
+void					header_bmp(char **data, t_scene s);
+void					fill_bmp(char **data, t_scene s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 12:04:21 by user42            #+#    #+#             */
-/*   Updated: 2021/01/22 13:40:33 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/23 09:05:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ t_vector			ft_get_color(t_scene *s, int i, int j)
 	ray.o = s->camera[s->current_camera].origin;
 	ray.dir = ft_normalize(ft_calcule_dir(s, i, j));
 	color = ft_raytracer2(ray, *s);
-	s->image.dat[s->reso.res[0] * j + i] = ft_change_color_to_pixel(ft_init_vector(color.x * 255, color.y * 255, color.z * 255));
+	s->image.dat[s->reso.res[0] * j + i] = ft_change_color_to_pixel(
+		ft_init_vector(color.x * 255, color.y * 255, color.z * 255));
 	color = ft_init_vector(ft_clamp(color.x, 0, 1),
 	ft_clamp(color.y, 0, 1), ft_clamp(color.z, 0, 1));
 	return (color);
