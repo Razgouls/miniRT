@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/20 08:42:39 by user42            #+#    #+#              #
-#    Updated: 2021/01/22 10:16:30 by user42           ###   ########.fr        #
+#    Updated: 2021/01/27 10:27:20 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ RM			= rm -f
 
 SRC =		Maths/ft_operator.c \
 			Maths/ft_utils_maths.c \
-			Parser/ft_affichage.c \
 			Parser/ft_check_error.c \
 			Parser/ft_check_error_bis.c \
 			Parser/ft_fill_parser.c \
@@ -38,7 +37,6 @@ SRC =		Maths/ft_operator.c \
 			Raytracer/ft_utils.c \
 			Raytracer/ft_utils_2.c \
 			Raytracer/ft_viewplane.c \
-			Raytracer/restes.c \
 			Raytracer/ft_minirt.c \
 			Raytracer/bmp_image.c \
 

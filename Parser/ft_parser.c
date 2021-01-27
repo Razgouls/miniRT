@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 14:44:33 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/23 09:13:18 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/27 10:25:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,40 +41,6 @@ int		ft_fill_struct(char **strs, t_list **l, t_identifiant *id, t_scene *s)
 	return (0);
 }
 
-void	ft_affichage(t_list *list, t_scene *s)
-{
-	int		i;
-
-	i = -1;
-	ft_affiche_res(s->reso);
-	ft_affiche_ambient_light(s->ambient_light);
-	while (++i < s->index_cam)
-		ft_affiche_camera(s->camera[i]);
-	i = -1;
-	while (++i < s->index_light)
-		ft_affiche_light(s->light[i]);
-	i = 0;
-	while (list)
-	{
-		t_base_form *b = (t_base_form *)list->content;
-		char *id = b->id;
-		if (ft_strcmp(id, "sp") == 0)
-			ft_affiche_sphere((t_sphere *)list->content);
-		else if (ft_strcmp(id, "pl") == 0)
-			ft_affiche_plane((t_plane *)list->content);
-		else if (ft_strcmp(id, "sq") == 0)
-			ft_affiche_square((t_square *)list->content);
-		else if (ft_strcmp(id, "cy") == 0)
-			ft_affiche_cylindre((t_cylindre *)list->content);
-		else if (ft_strcmp(id, "tr") == 0)
-			ft_affiche_triangle((t_triangle *)list->content);
-		else if (ft_strcmp(id, "co") == 0)
-			ft_affiche_cone((t_cone *)list->content);
-		i++;
-		list = list->next;
-	}
-}
-
 int		ft_load_lines(int fd, t_list **l, t_identifiant *id, t_scene *s)
 {
 	char	**res_split;
@@ -99,13 +65,19 @@ int		ft_load_lines(int fd, t_list **l, t_identifiant *id, t_scene *s)
 	return (0);
 }
 
-void	ft_init_struct_id(t_identifiant *id, t_scene *s)
+int		ft_init_struct_id(t_identifiant *id, t_scene *s, char **argv)
 {
+	s->check_save = 0;
 	id->resolution = 0;
 	id->ambient_light = 0;
 	s->index_cam = 0;
 	s->index_light = 0;
 	s->current_camera = 0;
+	if (argv[2] && ft_strcmp(argv[2], "-save") == 0)
+		s->check_save = 1;
+	else if (argv[2] && ft_strcmp(argv[2], "-save") != 0)
+		return (1);
+	return (0);
 }
 
 int		main(int argc, char **argv)
@@ -118,14 +90,14 @@ int		main(int argc, char **argv)
 
 	i = 0;
 	list = NULL;
-	ft_init_struct_id(&id, &scene);
 	if (argc < 2)
 		return (1);
 	while (argv[1][i] && argv[1][i] != '.')
 		i++;
 	if (!argv[1][i] || argv[1][i + 1] != 'r' || argv[1][i + 2] != 't')
 		return (2);
-	if ((fd = open(argv[1], O_RDONLY)) < 0)
+	if (ft_init_struct_id(&id, &scene, argv) ||
+		(fd = open(argv[1], O_RDONLY)) < 0)
 		return (3);
 	if (!ft_load_lines(fd, &list, &id, &scene))
 	{

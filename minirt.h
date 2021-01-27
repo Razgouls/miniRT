@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 13:52:58 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/23 10:31:29 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/27 10:27:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,9 @@ typedef struct			s_camera
 	t_vector			vect_orient;
 	t_vector			right_vect;
 	t_vector			up_vect;
+	t_matrice			matrice;
+	t_vector			viewPlaneUpLeft;
+	t_matrice			inv_matrice;
 	double				fov;
 }						t_camera;
 
@@ -235,6 +238,7 @@ typedef struct			s_scene
 	t_data				data;
 	t_choose_object		choose_object;
 	t_image				image;
+	int					check_save;
 }						t_scene;
 
 typedef struct			s_calc_tri
@@ -257,16 +261,6 @@ int						ft_fill_square(char **strs, t_list **list);
 int						ft_fill_cylindre(char **strs, t_list **list);
 int						ft_fill_triangle(char **strs, t_list **list);
 int						ft_fill_cone(char **strs, t_list **list);
-void					ft_affiche_res(t_resolution resolution);
-void					ft_affiche_ambient_light(t_ambient_light ambient_light);
-void					ft_affiche_camera(t_camera camera);
-void					ft_affiche_light(t_light light);
-void					ft_affiche_plane(t_plane *list);
-void					ft_affiche_sphere(t_sphere *list);
-void					ft_affiche_square(t_square *list);
-void					ft_affiche_cylindre(t_cylindre *list);
-void					ft_affiche_triangle(t_triangle *list);
-void					ft_affiche_cone(t_cone *cone);
 int						ft_check_error_res(char **strs, int boolean);
 int						ft_check_error_ambient(char **strs, int boolean);
 int						ft_check_error_camera(char **strs);
@@ -330,7 +324,7 @@ t_matrice				ft_init_matrice_trans(t_vector trans, int sign);
 t_vector				ft_trans_orient(t_ray ray, void *content);
 t_vector				ft_multi_mat_vect(t_matrice m, t_vector v);
 double					ft_radian_to_degres(double rad);
-int						ft_rotation_camera(int keycode, t_scene *s);
+int						ft_rotation_camera(int keycode, t_camera *camera);
 int						ft_rotation_objects(int keycode, void *content);
 t_vector				ft_rotate_vector(t_vector v, int keycode);
 void					ft_affichage(t_list *list, t_scene *s);
@@ -346,5 +340,6 @@ t_pixel					ft_get_pixel(t_scene s, int i, int j);
 int						export_bmp(t_scene s);
 void					header_bmp(char **data, t_scene s);
 void					fill_bmp(char **data, t_scene s);
+t_vector				ft_view(double height, t_scene *s);
 
 #endif

@@ -6,33 +6,29 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 12:03:30 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/19 13:42:52 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/27 09:54:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-int				ft_rotation_camera(int keycode, t_scene *s)
+int				ft_rotation_camera(int keycode, t_camera *camera)
 {
-	t_camera camera;
-
-	camera = s->camera[s->current_camera];
 	if (keycode == 'u')
-		camera.vect_orient.y = camera.vect_orient.y + VALUE_ROTATION;
+		camera->vect_orient.y = camera->vect_orient.y + VALUE_ROTATION;
 	else if (keycode == 'h')
-		camera.vect_orient.x = camera.vect_orient.x - VALUE_ROTATION;
+		camera->vect_orient.x = camera->vect_orient.x - VALUE_ROTATION;
 	else if (keycode == 'j')
-		camera.vect_orient.y = camera.vect_orient.y - VALUE_ROTATION;
+		camera->vect_orient.y = camera->vect_orient.y - VALUE_ROTATION;
 	else if (keycode == 'k')
-		camera.vect_orient.x = camera.vect_orient.x + VALUE_ROTATION;
+		camera->vect_orient.x = camera->vect_orient.x + VALUE_ROTATION;
 	else if (keycode == 'o')
-		camera.vect_orient.x = camera.vect_orient.z + VALUE_ROTATION;
+		camera->vect_orient.x = camera->vect_orient.z + VALUE_ROTATION;
 	else if (keycode == 'l')
-		camera.vect_orient.z = camera.vect_orient.z - VALUE_ROTATION;
-	camera.vect_orient.x = ft_clamp(camera.vect_orient.x, -1, 1);
-	camera.vect_orient.y = ft_clamp(camera.vect_orient.y, -1, 1);
-	camera.vect_orient.z = ft_clamp(camera.vect_orient.z, -1, 1);
-	s->camera[s->current_camera] = camera;
+		camera->vect_orient.z = camera->vect_orient.z - VALUE_ROTATION;
+	camera->vect_orient.x = ft_clamp(camera->vect_orient.x, -1, 1);
+	camera->vect_orient.y = ft_clamp(camera->vect_orient.y, -1, 1);
+	camera->vect_orient.z = ft_clamp(camera->vect_orient.z, -1, 1);
 	return (0);
 }
 

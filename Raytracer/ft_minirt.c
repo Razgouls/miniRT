@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 15:10:26 by elieolive         #+#    #+#             */
-/*   Updated: 2021/01/23 10:31:44 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/27 10:26:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int			ft_close_clavier(int keycode, t_scene *s)
 	else if (ft_check_keycode(keycode) == 2)
 		ft_translation_camera(keycode, s);
 	else if (ft_check_keycode(keycode) == 3)
-		ft_rotation_camera(keycode, s);
+		ft_rotation_camera(keycode, &(s->camera[s->current_camera]));
 	else if (keycode == 65307 &&
 		ft_check_keycode(s->choose_object.last_keycode) == 1)
 		s->choose_object.last_keycode = -1;
@@ -67,9 +67,11 @@ int					ft_raytracer(t_scene *s)
 	int			j;
 
 	j = -1;
-	s->image.h = 400;
-	s->image.w = 400;
-	s->image.dat = malloc(sizeof(t_pixel) * s->image.w * s->image.h);
+	s->image.h = s->reso.res[1];
+	s->image.w = s->reso.res[0];
+	if (!(s->image.dat = malloc(sizeof(t_pixel) * s->image.w * s->image.h)))
+		return (0);
+	s->camera[s->current_camera].viewPlaneUpLeft = ft_view(s->height, s);
 	while (++j < s->reso.res[1])
 	{
 		i = -1;
@@ -77,7 +79,8 @@ int					ft_raytracer(t_scene *s)
 			s->data.buffer[j *
 				s->reso.res[0] + i] = ft_change_color(ft_get_color(s, i, j));
 	}
-	export_bmp(*s);
+	if (s->check_save)
+		export_bmp(*s);
 	mlx_put_image_to_window(s->data.mlx_ptr,
 		s->data.mlx_win, s->data.image, 0, 0);
 	mlx_loop(s->data.mlx_ptr);
@@ -103,6 +106,8 @@ int					ft_init_window(t_scene *s)
 	data.buffer = (unsigned int *)mlx_get_data_addr(data.image,
 		&data.pixel_bits, &data.line_bytes, &data.endian);
 	s->data = data;
+	s->width = 1;
+	s->height = (float)s->reso.res[1] / s->reso.res[0];
 	ft_raytracer(s);
 	free(s->image.dat);
 	return (EXIT_SUCCESS);
