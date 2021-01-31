@@ -10,17 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC			= clang
+NAME		= libft.a
 
-FLAGS		= 	-Wall -Wextra -Werror
-
-NAME		= 	libft.a
-LIBDIR		= 	./ft_printf/
-PRINTF		=	libftprintf.a
-
-RM			= rm -f
-
-SRC		 	=	ft_atoi.c \
+SRCS_LIST	= 	ft_atoi.c \
 				ft_bzero.c \
 				ft_isalpha.c \
 				ft_isalnum.c \
@@ -56,6 +48,7 @@ SRC		 	=	ft_atoi.c \
 				ft_putendl_fd.c \
 				ft_putnbr_fd.c \
 				ft_get_next_line.c \
+				ft_strlen_number.c \
 				ft_strdel.c \
 				ft_strndup.c \
 				ft_strcmp.c \
@@ -78,29 +71,48 @@ SRC		 	=	ft_atoi.c \
 				ft_abs.c \
 				ft_rad_to_deg.c \
 
-INCS		= libft.h
+WHITE   		= \x1b[37;01m
+CYAN    		= \x1b[36;01m
+PINK    		= \x1b[35;01m
+BLUE    		= \x1b[34;01m
+YELLOW  		= \x1b[33;01m
+GREEN   		= \x1b[32;01m
+RED     		= \x1b[31;01m
+BLACK   		= \x1b[30;01m
+RESET   		= \x1b[0m
 
-OBJS		= ${SRC:.c=.o}
-OBJS_BONUS	= ${SRC_BONUS:.c=.o}
+SRCS		= $(addprefix ${FOLDER}/, ${SRCS_LIST})
+OBJS		= ${SRCS:.c=.o}
+
+HEADER		= includes
+FOLDER		= srcs
+
+FT_PRINTF 	= $(FOLDER)/ft_printf
+
+CC			= gcc
+CFLAGS 		= -Wall -Wextra -Werror
+RM			= rm -f
+
+$(NAME):	${OBJS}
+			@echo "$(GREEN) -----> COMPILATION FT_PRINTF <----- $(RESET)"
+			@make -C $(FT_PRINTF)
+			@cp $(FT_PRINTF)/libftprintf.a ./$(NAME)
+			@ar -rcs ${NAME} ${OBJS}
+
+%.o: %.c
+			@${CC} -c ${CFLAGS} -o $@ $< -I ${HEADER}
+			@echo "$(GREEN) [OK] : $(RESET) $<"
 
 all:		${NAME}
 
-${NAME}:	${OBJS}
-			make all -C $(LIBDIR)
-			cp $(LIBDIR)/$(PRINTF) $(NAME)
-			ar rc ${NAME} ${OBJS}
-
-%.o: %.c
-			$(CC) -I. -o $@ -c $? $(FLAGS)
-
-clean:		
-			${RM} ${OBJS} ${OBJS_BONUS}
+clean:
+			@${RM} ${OBJS}
+			@make clean -C $(FT_PRINTF)
 
 fclean:		clean
-			${RM} ${NAME}
+			@${RM} ${NAME}
+			@make fclean -C $(FT_PRINTF)
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
-
-
+.PHONY: 	all fclean clean re
