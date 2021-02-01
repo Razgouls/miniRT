@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_multi.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eoliveir <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 12:58:51 by eoliveir          #+#    #+#             */
-/*   Updated: 2020/12/08 14:49:54 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/02/01 13:17:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ int		on_separator(char *charset, char c)
 int		count_words(char *str, char *charset)
 {
 	int i;
-	int j;
 	int cmp;
 	int check;
 
 	cmp = 0;
 	check = 0;
-	j = 0;
 	i = 0;
 	while (str[i])
 	{

@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 09:04:13 by eoliveir          #+#    #+#              #
-#    Updated: 2021/01/19 11:49:16 by user42           ###   ########.fr        #
+#    Updated: 2021/02/01 14:12:39 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,15 +71,8 @@ SRCS_LIST	= 	ft_atoi.c \
 				ft_abs.c \
 				ft_rad_to_deg.c \
 
-WHITE   		= \x1b[37;01m
-CYAN    		= \x1b[36;01m
-PINK    		= \x1b[35;01m
-BLUE    		= \x1b[34;01m
-YELLOW  		= \x1b[33;01m
-GREEN   		= \x1b[32;01m
-RED     		= \x1b[31;01m
-BLACK   		= \x1b[30;01m
-RESET   		= \x1b[0m
+GREEN   		= \e[32m
+RESET   		= \e[39m
 
 SRCS		= $(addprefix ${FOLDER}/, ${SRCS_LIST})
 OBJS		= ${SRCS:.c=.o}

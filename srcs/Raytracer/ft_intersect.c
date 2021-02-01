@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 10:25:01 by user42            #+#    #+#             */
-/*   Updated: 2021/01/19 13:29:32 by user42           ###   ########.fr       */
+/*   Updated: 2021/02/01 15:39:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ double		ft_intersect_plane(t_ray ray, t_plane *pl)
 	ray.o = ft_multi_mat_vect(pl->base.inv_matrice, ray.o);
 	ray.dir = ft_trans_orient(ray, (void *)pl);
 	t1 = -(ray.o.y) / ray.dir.y;
-	if (t1 <= 0.0001)
+	if (t1 < 0.0001)
 		return (-1);
 	pl->base.normale = ft_init_vector(0, 1, 0);
 	if (pl->base.origin.y > ray.o.y)

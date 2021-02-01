@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eoliveir <eoliveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 13:48:39 by eoliveir          #+#    #+#             */
-/*   Updated: 2020/11/23 10:25:04 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/02/01 13:17:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 static int		count_words(char const *str, char c)
 {
 	int i;
-	int j;
 	int cmp;
 	int check;
 
 	cmp = 0;
 	check = 0;
-	j = 0;
 	i = 0;
 	while (str[i])
 	{

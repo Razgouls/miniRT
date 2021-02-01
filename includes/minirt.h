@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 13:52:58 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/01/27 10:27:08 by user42           ###   ########.fr       */
+/*   Updated: 2021/02/01 16:30:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <string.h>
 # include "mlx.h"
 
-# define X_RES 2000
-# define Y_RES 1200
+# define X_RES 500
+# define Y_RES 500
 # define VALUE_TRANSLATION 0.5
 # define VALUE_ROTATION 0.05
 # define VALUE_TRANSLATION_LIGHTX 0
@@ -124,7 +124,7 @@ typedef struct			s_camera
 	t_vector			right_vect;
 	t_vector			up_vect;
 	t_matrice			matrice;
-	t_vector			viewPlaneUpLeft;
+	t_vector			view;
 	t_matrice			inv_matrice;
 	double				fov;
 }						t_camera;
@@ -342,5 +342,8 @@ void					header_bmp(char **data, t_scene s);
 void					fill_bmp(char **data, t_scene s);
 t_vector				ft_view(double height, t_scene *s);
 int						ft_p_virgule(char **strs, char c);
+int						ft_close_clavier_aux(int keycode, t_scene *s);
+int						ft_close_clavier(int keycode, t_scene *s);
+int						ft_close_mouse(t_scene *s);
 
 #endif

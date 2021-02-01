@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eoliveir <eoliveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:12:43 by eoliveir          #+#    #+#             */
-/*   Updated: 2020/12/02 13:53:27 by elieolive        ###   ########.fr       */
+/*   Updated: 2021/02/01 13:18:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,6 @@ int		ft_convert_hexa_len(unsigned long long nb)
 	int				cmp;
 
 	cmp = 0;
-	if (nb < 0)
-	{
-		cmp++;
-		nb *= -1;
-	}
 	while (nb >= 16)
 	{
 		nb /= 16;
