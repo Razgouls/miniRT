@@ -10,13 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 int			ft_fill_res(char **strs, t_identifiant *id, t_scene *s)
 {
 	t_resolution	reso;
 
-	if (ft_check_error_res(strs, id->resolution))
+	if (ft_check_error_res(strs, id->resolution) ||
+			ft_p_virgule(strs, ',') == 0)
 		return (1);
 	reso.id = strs[0][0];
 	id->resolution = 1;
@@ -30,7 +31,8 @@ int			ft_fill_ambient_light(char **strs, t_identifiant *id, t_scene *s)
 {
 	t_ambient_light	ambient_light;
 
-	if (ft_check_error_ambient(strs, id->ambient_light))
+	if (ft_check_error_ambient(strs, id->ambient_light) ||
+		ft_p_virgule(strs, ',') == 0)
 		return (1);
 	ambient_light.id = strs[0][0];
 	id->ambient_light = 1;
@@ -44,7 +46,7 @@ int			ft_fill_camera(char **strs, t_scene *s)
 {
 	t_camera	camera;
 
-	if (ft_check_error_camera(strs))
+	if (ft_check_error_camera(strs) || ft_p_virgule(strs, ',') == 0)
 		return (1);
 	camera.id = strs[0][0];
 	ft_fill_base_vector(ft_split(strs[1], ','), &camera.origin);
@@ -64,7 +66,7 @@ int			ft_fill_light(char **strs, t_scene *s)
 {
 	t_light	light;
 
-	if (ft_check_error_light(strs))
+	if (ft_check_error_light(strs) || ft_p_virgule(strs, ',') == 0)
 		return (1);
 	light.id = strs[0][0];
 	ft_fill_base_vector(ft_split(strs[1], ','), &light.origin);

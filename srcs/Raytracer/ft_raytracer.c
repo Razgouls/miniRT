@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 t_vector			ft_get_light_at(t_ray ray, void *content,
 						t_ray ray_light, t_light light)

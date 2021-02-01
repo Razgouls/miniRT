@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 double		ft_intersect(t_ray ray, void *content)
 {
@@ -45,7 +45,7 @@ double		ft_intersect_sphere(t_ray ray, t_sphere *sp)
 	abc.y = 2 * ft_scalaire(ray.dir, ray.o);
 	abc.z = ft_scalaire(ray.o, ray.o) - pow(sp->radius, 2);
 	det = ft_calc_determinant(abc.x, abc.y, abc.z);
-	if (det < 0)
+	if (det < 0.0001)
 		return (-1);
 	else if (det == 0)
 		return (-abc.y / 2 * abc.x);

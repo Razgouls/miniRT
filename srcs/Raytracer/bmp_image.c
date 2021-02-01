@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 void		fill_bmp(char **data, t_scene s)
 {
@@ -72,6 +72,7 @@ int			export_bmp(t_scene s)
 	if ((fd = open("bmp_image.bmp", O_CREAT | O_TRUNC | O_RDWR, 0644)) <= 0)
 		return (-1);
 	write(fd, data, (size + 122));
+	free(data);
 	close(fd);
 	return (0);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 int		ft_fill_struct(char **strs, t_list **l, t_identifiant *id, t_scene *s)
 {
@@ -76,7 +76,7 @@ int		ft_init_struct_id(t_identifiant *id, t_scene *s, char **argv)
 	if (argv[2] && ft_strcmp(argv[2], "-save") == 0)
 		s->check_save = 1;
 	else if (argv[2] && ft_strcmp(argv[2], "-save") != 0)
-		return (1);
+		return (ft_printf("Error : %s non valide\n", argv[2]));
 	return (0);
 }
 
@@ -90,15 +90,15 @@ int		main(int argc, char **argv)
 
 	i = 0;
 	list = NULL;
-	if (argc < 2)
-		return (1);
+	if (argc < 2 || argc > 3)
+		return (ft_printf("Error : Problème d'arguments\n"));
 	while (argv[1][i] && argv[1][i] != '.')
 		i++;
 	if (!argv[1][i] || argv[1][i + 1] != 'r' || argv[1][i + 2] != 't')
-		return (2);
+		return (ft_printf("Error : %s non pris en charge\n", argv[1]));
 	if (ft_init_struct_id(&id, &scene, argv) ||
 		(fd = open(argv[1], O_RDONLY)) < 0)
-		return (3);
+		return (ft_printf("Error : Impossible d'ouvrir le fichier\n"));
 	if (!ft_load_lines(fd, &list, &id, &scene))
 	{
 		scene.list = list;

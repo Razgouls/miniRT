@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 double			ft_aire_tr(t_vector a, t_vector b, t_vector c)
 {

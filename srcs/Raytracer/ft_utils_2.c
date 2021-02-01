@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 t_vector		ft_intersect_ray(t_vector origin, t_vector dir, double t)
 {

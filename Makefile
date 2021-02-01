@@ -9,6 +9,7 @@ SRCS_LIST 		= Maths/ft_operator.c \
 				  Parser/ft_fill_parser_base.c \
 				  Parser/ft_fill_parser_res_aligth.c \
 				  Parser/ft_parser.c \
+				  Parser/ft_utils_parser.c \
 				  Parser/ft_print_error.c \
 				  Raytracer/ft_intersect.c \
 				  Raytracer/ft_intersect_2.c \
@@ -37,45 +38,35 @@ OBJS			= ${SRCS:.c=.o}
 
 HEADER			= includes
 FOLDER			= srcs
-SAVE 			= -fsanitize=address
 LIBFT 			= libft
 
 CC				= gcc
-CFLAGS 			= -Wall -Wextra -Werror $(SAVE)
+CFLAGS 			= -Wall -Wextra -Werror
 LFLAGS			= -L libft -lft
-
-LIBMLX 			= libmlx.dylib \
-				  libmlx.a
+MLX_DIR			= minilibx_opengl
 
 RM				= rm -f
 
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
-				@echo "$(GREEN) -----> NORMINETTE MLX <----- $(RESET)"
 				@echo "$(GREEN) -----> COMPILATION MLX <----- $(RESET)"
-				@make -C ./minilibx_mms
 				@make -C ./minilibx_opengl
-				@cp ./minilibx_mms/libmlx.dylib libmlx.dylib
 				@cp ./minilibx_opengl/libmlx.a libmlx.a
 				@echo "$(GREEN) -----> COMPILATION LIBFT <----- $(RESET)"
-				@make -s -C $(LIBFT)
-				@$(CC) $(CFLAGS) $(LFLAGS) -I $(HEADER) $(LIBMLX) $(OBJS) -o $(NAME)
+				@make -C $(LIBFT)
+				@${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${MLX_DIR} -lmlx $(LFLAGS) -lmlx -framework OpenGL -framework AppKit
 
 %.o: %.c
 				@$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
 				@echo "$(GREEN) [OK] : $(RESET) $<"
 
-norme:
-				norminette $(DIR_SRCS)
-				norminette $(DIR_HEADERS)
-
 clean:
-				@echo "$(RED) -----> CLEAR <----- $(RESET)"
+				@echo "$(GREEN) -----> CLEAR OK <----- $(RESET)"
 				@$(RM) $(OBJS)
 
 fclean:			clean
-				@echo "$(RED) -----> COMPILATION FCLEAN <----- $(RESET)"
+				@echo "$(GREEN) -----> COMPILATION FCLEAN OK <----- $(RESET)"
 				@$(RM) $(NAME)
 				@make fclean -C $(LIBFT)
 

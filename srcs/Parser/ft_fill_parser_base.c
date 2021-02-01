@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 void			ft_fill_base_vector(char **coordo, t_vector *origin)
 {

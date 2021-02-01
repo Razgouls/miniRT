@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 int		ft_fill_plane(char **strs, t_list **list)
 {
 	t_plane		*plane;
 	t_base_form	base;
 
-	if (ft_check_error_plane(strs))
+	if (ft_check_error_plane(strs) || ft_p_virgule(strs, ',') == 0)
 		return (1);
 	if (!(plane = malloc(sizeof(*plane))))
 		return (1);
@@ -35,7 +35,7 @@ int		ft_fill_square(char **strs, t_list **list)
 	t_square	*square;
 	t_base_form	base;
 
-	if (ft_check_error_square(strs))
+	if (ft_check_error_square(strs) || ft_p_virgule(strs, ',') == 0)
 		return (1);
 	if (!(square = malloc(sizeof(*square))))
 		return (1);
@@ -54,7 +54,7 @@ int		ft_fill_sphere(char **strs, t_list **list)
 	t_sphere	*sphere;
 	t_base_form	base;
 
-	if (ft_check_error_sphere(strs))
+	if (ft_check_error_sphere(strs) || ft_p_virgule(strs, ',') == 0)
 		return (1);
 	if (!(sphere = malloc(sizeof(*sphere))))
 		return (1);
@@ -70,7 +70,7 @@ int		ft_fill_cylindre(char **strs, t_list **list)
 	t_cylindre	*cylindre;
 	t_base_form	base;
 
-	if (ft_check_error_cylindre(strs))
+	if (ft_check_error_cylindre(strs) || ft_p_virgule(strs, ',') == 0)
 		return (1);
 	if (!(cylindre = malloc(sizeof(*cylindre))))
 		return (1);
@@ -90,7 +90,7 @@ int		ft_fill_triangle(char **strs, t_list **list)
 	t_triangle	*triangle;
 	t_base_form	base;
 
-	if (ft_check_error_triangle(strs))
+	if (ft_check_error_triangle(strs) || ft_p_virgule(strs, ',') == 0)
 		return (1);
 	if (!(triangle = malloc(sizeof(*triangle))))
 		return (1);

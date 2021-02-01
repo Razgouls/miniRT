@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 int		ft_printf_error_colors(char **colors)
 {
@@ -23,7 +23,7 @@ int		ft_printf_error_colors(char **colors)
 		color = (int)ft_atof(colors[i]);
 		if (color < 0 || color > 255 || i > 2)
 		{
-			ft_printf("Error n : Les valeurs RGB sont erronées\n");
+			ft_printf("Error : Les valeurs RGB sont erronées\n");
 			ft_free_tab(colors);
 			return (1);
 		}
@@ -31,7 +31,7 @@ int		ft_printf_error_colors(char **colors)
 	}
 	if (i < 3)
 	{
-		ft_printf("Error n : Manque couleurs RGB\n");
+		ft_printf("Error : Manque couleurs RGB\n");
 		ft_free_tab(colors);
 		return (1);
 	}
@@ -47,9 +47,9 @@ int		ft_printf_error_origin(char **origin, int index)
 	while (origin[i])
 		i++;
 	if (i < 3)
-		ft_printf("Error n : origin manquantes\n");
+		ft_printf("Error : origin manquantes\n");
 	if (i > 3)
-		ft_printf("Error n : Trop de coor origin\n");
+		ft_printf("Error : Trop de coor origin\n");
 	(index == 0) ? ft_free_tab(origin) : NULL;
 	if (i < 3 || i > 3)
 		return (1);
@@ -72,7 +72,7 @@ int		ft_printf_error_vector(char **origin)
 		tmp = ft_atof(origin[i]);
 		if (tmp < -1 || tmp > 1)
 		{
-			ft_printf("Error n : Vecteur : x, y, z\
+			ft_printf("Error : Vecteur : x, y, z\
 			doit être compris entre -1 et 1 : ");
 			ft_printf("%s,%s,%s\n", origin[0], origin[1], origin[2]);
 			ft_free_tab(origin);

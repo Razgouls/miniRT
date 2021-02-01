@@ -14,7 +14,6 @@
 # define MINIRT_H
 
 # include "../libft/includes/libft.h"
-# include "mlx.h"
 # include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
@@ -23,6 +22,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <string.h>
+# include "mlx.h"
 
 # define X_RES 2000
 # define Y_RES 1200
@@ -341,5 +341,6 @@ int						export_bmp(t_scene s);
 void					header_bmp(char **data, t_scene s);
 void					fill_bmp(char **data, t_scene s);
 t_vector				ft_view(double height, t_scene *s);
+int						ft_p_virgule(char **strs, char c);
 
 #endif

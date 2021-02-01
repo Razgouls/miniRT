@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 unsigned int		ft_change_color(t_vector color)
 {
@@ -83,8 +83,8 @@ int					ft_raytracer(t_scene *s)
 		export_bmp(*s);
 	mlx_put_image_to_window(s->data.mlx_ptr,
 		s->data.mlx_win, s->data.image, 0, 0);
-	mlx_key_hook(s->data.mlx_win, ft_close_clavier, s);
 	mlx_hook(s->data.mlx_win, 33, 1L << 17, ft_close_mouse, s);
+	system("leaks miniRT");
 	mlx_loop(s->data.mlx_ptr);
 	return (0);
 }
@@ -99,12 +99,13 @@ int					ft_init_window(t_scene *s)
 		s->reso.res[1] = Y_RES;
 	if ((data.mlx_ptr = mlx_init()) == NULL)
 		return (EXIT_FAILURE);
-	data.image = mlx_new_image(data.mlx_ptr, s->reso.res[0], s->reso.res[1]);
-	data.buffer = (unsigned int *)mlx_get_data_addr(data.image,
-		&data.pixel_bits, &data.line_bytes, &data.endian);
 	if ((data.mlx_win = mlx_new_window(data.mlx_ptr,
 		s->reso.res[0], s->reso.res[1], "MiniRT")) == NULL)
 		return (EXIT_FAILURE);
+	data.image = mlx_new_image(data.mlx_ptr, s->reso.res[0], s->reso.res[1]);
+	mlx_key_hook(data.mlx_win, ft_close_clavier, s);
+	data.buffer = (unsigned int *)mlx_get_data_addr(data.image,
+		&data.pixel_bits, &data.line_bytes, &data.endian);
 	s->data = data;
 	s->width = 1;
 	s->height = (float)s->reso.res[1] / s->reso.res[0];
